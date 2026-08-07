@@ -1,0 +1,7 @@
+project_id = "iomaxlhnkvllpdneexxz"
+
+[functions.crear-pago-galiopay]
+verify_jwt = true
+
+[functions.galiopay-webhook]
+verify_jwt = false
