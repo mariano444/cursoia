@@ -1,0 +1,2224 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcademIA â€” Curso Profesional de IA Generativa 2026</title>
+<meta name="description" content="AcademIA: aprende a crear imÃ¡genes, video, audio y publicidad profesional con IA generativa. 9 mÃ³dulos, 5 proyectos guiados y mÃ¡s de 30 herramientas comparadas. Acceso de por vida, pago Ãºnico.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ---- base surfaces ---- */
+    --bg: #0b0d12; --surface: #12151c; --surface-raised: #1a1e27; --surface-strong: #232838;
+    --border: #262c39; --text-primary: #f3f5f9; --text-secondary: #9ba3b4; --text-tertiary: #6b7280; --text-quaternary: #454b58;
+    /* ---- brand accent (buttons, links, progress) ---- */
+    --accent: #e3a63d; --accent-soft: rgba(227,166,61,0.13); --accent-strong: #f0b957;
+    /* ---- module / track colors (image, video, audio, ads) ---- */
+    --track-img: #8d7cf0; --track-img-soft: rgba(141,124,240,0.13);
+    --track-vid: #46c7d6; --track-vid-soft: rgba(70,199,214,0.13);
+    --track-aud: #e8618f; --track-aud-soft: rgba(232,97,143,0.13);
+    --track-ads: #ff6b4a; --track-ads-soft: rgba(255,107,74,0.13);
+    /* ---- status ---- */
+    --positive: #34d399; --positive-soft: rgba(52,211,153,0.12);
+    --warning: #fbbf24; --warning-soft: rgba(251,191,36,0.12); --danger: #f87171;
+    --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 22px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.35); --shadow-lg: 0 24px 60px rgba(0,0,0,0.45);
+    --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+    --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    --transition: 0.18s cubic-bezier(0.4,0,0.2,1);
+    --wrap: 1120px;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--font-sans); background:var(--bg); color:var(--text-primary); line-height:1.6; min-height:100vh; overflow-x:hidden; }
+  ::-webkit-scrollbar { width:8px; height:8px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--text-quaternary); }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  img, svg { max-width:100%; display:block; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ============ SHARED UTILITIES ============ */
+  .eyebrow { display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-tertiary); font-weight:500; }
+  .eyebrow .dot { width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  .btn { padding:10px 18px; border-radius:var(--radius-sm); font-size:13.5px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--surface-raised); color:var(--text-secondary); transition:all var(--transition); font-family:var(--font-sans); display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+  .btn:hover { background:var(--surface-strong); color:var(--text-primary); }
+  .btn-primary { background:var(--accent); color:#1a1305; border-color:var(--accent); }
+  .btn-primary:hover { background:var(--accent-strong); border-color:var(--accent-strong); color:#1a1305; }
+  .btn-success { background:var(--positive); color:#0a1f16; border-color:var(--positive); font-weight:700; }
+  .btn-success:hover { opacity:0.88; }
+  .btn-lg { padding:15px 30px; font-size:15px; border-radius:var(--radius-md); }
+  .reveal { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in-view { opacity:1; transform:translateY(0); }
+  .ruler { display:flex; align-items:center; gap:3px; height:14px; opacity:0.5; margin:0 auto; width:100%; max-width:220px; }
+  .ruler span { flex:1; height:5px; background:var(--border); }
+  .ruler span:nth-child(4n) { height:10px; background:var(--text-quaternary); }
+
+  /* ============ LANDING NAV ============ */
+  .l-nav { position:sticky; top:0; z-index:80; background:rgba(11,13,18,0.86); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+  .l-nav-inner { max-width:var(--wrap); margin:0 auto; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; }
+  .l-logo { font-family:var(--font-display); font-weight:700; font-size:16px; letter-spacing:-0.2px; display:flex; align-items:center; gap:9px; }
+  .l-logo .mark { width:26px; height:26px; border-radius:7px; background:linear-gradient(135deg,var(--track-img),var(--track-vid) 34%,var(--track-aud) 68%,var(--track-ads)); flex-shrink:0; }
+  .l-nav-links { display:flex; gap:26px; font-size:13.5px; color:var(--text-secondary); }
+  .l-nav-links a:hover { text-decoration:none; color:var(--text-primary); }
+  .l-nav-cta-wrap { display:flex; align-items:center; gap:14px; }
+  @media(max-width:760px){ .l-nav-links{ display:none; } }
+
+  /* ============ LANDING HERO ============ */
+  .l-hero { max-width:var(--wrap); margin:0 auto; padding:64px 28px 40px; display:grid; grid-template-columns:1.05fr 0.95fr; gap:52px; align-items:center; }
+  .l-hero h1 { font-family:var(--font-display); font-size:44px; line-height:1.08; font-weight:700; letter-spacing:-1px; margin:18px 0 18px; }
+  .l-hero h1 em { font-style:normal; background:linear-gradient(90deg,var(--track-img),var(--track-vid) 40%,var(--track-aud) 70%,var(--track-ads)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .l-hero p.lede { font-size:16px; color:var(--text-secondary); max-width:480px; margin-bottom:28px; }
+  .l-hero-ctas { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .l-trust { display:flex; gap:28px; flex-wrap:wrap; }
+  .l-trust-item { }
+  .l-trust-item .num { font-family:var(--font-display); font-size:21px; font-weight:700; color:var(--text-primary); }
+  .l-trust-item .lbl { font-size:11.5px; color:var(--text-tertiary); margin-top:1px; }
+
+  /* ---- signature: multi-track render visual ---- */
+  .track-viz { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl); padding:24px 22px; box-shadow:var(--shadow-lg); }
+  .track-viz-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+  .track-viz-head span { font-family:var(--font-mono); font-size:11px; color:var(--text-tertiary); letter-spacing:0.6px; }
+  .track-viz-head .rec { display:flex; align-items:center; gap:6px; color:var(--track-ads); }
+  .track-viz-head .rec::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--track-ads); animation:pulse 1.6s ease infinite; }
+  .track { display:flex; align-items:center; gap:10px; height:30px; margin-bottom:8px; }
+  .track-label { width:38px; flex-shrink:0; font-family:var(--font-mono); font-size:10px; color:var(--text-tertiary); text-align:right; }
+  .track-lane { flex:1; display:flex; gap:6px; height:24px; background:var(--surface-raised); border-radius:6px; padding:3px; overflow:hidden; }
+  .clip { height:100%; border-radius:4px; opacity:0; transform:translateX(-10px); animation:clipIn 0.5s cubic-bezier(.4,0,.2,1) forwards; }
+  .track[data-t="img"] .clip { background:var(--track-img); }
+  .track[data-t="vid"] .clip { background:var(--track-vid); }
+  .track[data-t="aud"] .clip { background:var(--track-aud); }
+  .track[data-t="ads"] .clip { background:var(--track-ads); }
+  .track-output { margin-top:14px; padding-top:14px; border-top:1px dashed var(--border); }
+  .track-output .track-lane { background:transparent; padding:0; }
+  .track-output .clip { background:linear-gradient(90deg,var(--track-img),var(--track-vid) 33%,var(--track-aud) 66%,var(--track-ads)); width:100% !important; height:100%; animation:outputGlow 2.4s ease-in-out infinite, clipIn 0.6s ease forwards; animation-delay:1.4s, 1.4s; }
+  @keyframes clipIn { to { opacity:1; transform:translateX(0); } }
+  @keyframes outputGlow { 0%,100%{ filter:brightness(1); } 50%{ filter:brightness(1.18); } }
+  @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.25; } }
+  .track-viz-foot { margin-top:16px; font-size:12px; color:var(--text-tertiary); text-align:center; }
+
+  @media(max-width:900px){ .l-hero{ grid-template-columns:1fr; padding-top:40px; } .l-hero h1{ font-size:32px; } }
+
+  /* ============ LANDING SECTIONS (generic) ============ */
+  .l-section { max-width:var(--wrap); margin:0 auto; padding:70px 28px; }
+  .l-section-head { max-width:620px; margin-bottom:40px; }
+  .l-section-head h2 { font-family:var(--font-display); font-size:30px; font-weight:700; letter-spacing:-0.5px; margin:14px 0 12px; }
+  .l-section-head p { font-size:15px; color:var(--text-secondary); }
+  .l-divider { display:flex; align-items:center; gap:16px; padding:0 28px; max-width:var(--wrap); margin:0 auto; }
+  .l-divider .line { flex:1; height:1px; background:var(--border); }
+
+  /* problem grid */
+  .problem-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .problem-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:22px; }
+  .problem-card .glyph { font-family:var(--font-mono); font-size:12px; color:var(--danger); margin-bottom:12px; }
+  .problem-card h4 { font-size:15px; font-weight:600; margin-bottom:8px; }
+  .problem-card p { font-size:13.5px; color:var(--text-secondary); margin:0; }
+  @media(max-width:820px){ .problem-grid{ grid-template-columns:1fr; } }
+
+  /* curriculum list (solo tÃ­tulos) */
+  .curr-list { display:flex; flex-direction:column; gap:10px; }
+  .curr-item { border:1px solid var(--border); border-radius:var(--radius-md); background:var(--surface); overflow:hidden; transition:border-color var(--transition), transform var(--transition); }
+  .curr-item:hover { border-color:var(--text-quaternary); transform:translateX(2px); }
+  .curr-head { display:flex; align-items:center; gap:16px; padding:18px 20px; width:100%; background:none; border:none; text-align:left; font-family:inherit; color:inherit; }
+  .curr-flag { width:8px; height:36px; border-radius:4px; flex-shrink:0; }
+  .curr-head-txt { flex:1; }
+  .curr-head-txt .m { font-family:var(--font-mono); font-size:10.5px; color:var(--text-tertiary); letter-spacing:0.6px; text-transform:uppercase; margin-bottom:2px; }
+  .curr-head-txt h4 { font-size:15px; font-weight:600; }
+  /* tools grid */
+  .tool-chip-grid { display:flex; flex-wrap:wrap; gap:10px; }
+  .tool-chip { border:1px solid var(--border); background:var(--surface); border-radius:999px; padding:8px 16px; font-size:13px; color:var(--text-secondary); display:flex; align-items:center; gap:8px; }
+  .tool-chip .sw { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+
+  /* labs */
+  .lab-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .lab-card { border:1px solid var(--border); border-radius:var(--radius-md); padding:20px; background:var(--surface); border-top:3px solid var(--track-img); }
+  .lab-card:nth-child(2) { border-top-color:var(--track-vid); }
+  .lab-card:nth-child(3) { border-top-color:var(--track-aud); }
+  .lab-card:nth-child(4) { border-top-color:var(--track-ads); }
+  .lab-card .n { font-family:var(--font-mono); font-size:11px; color:var(--text-tertiary); margin-bottom:8px; }
+  .lab-card h4 { font-size:14.5px; font-weight:600; margin-bottom:8px; }
+  .lab-card p { font-size:13px; color:var(--text-secondary); }
+  @media(max-width:900px){ .lab-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:560px){ .lab-grid{ grid-template-columns:1fr; } }
+
+  /* testimonials */
+  .testi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media(max-width:1050px){ .testi-grid{ grid-template-columns:repeat(2,1fr); } }
+  .testi-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:22px; display:flex; flex-direction:column; }
+  .testi-stars { color:var(--warning); font-size:13px; margin-bottom:12px; letter-spacing:2px; }
+  .testi-card p.quote { font-size:13.5px; color:var(--text-secondary); flex:1; margin-bottom:16px; }
+  .testi-who { display:flex; align-items:center; gap:10px; }
+  .testi-avatar { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:13px; color:#12151c; flex-shrink:0; }
+  .testi-who .name { font-size:13px; font-weight:600; }
+  .testi-who .role { font-size:11.5px; color:var(--text-tertiary); }
+  @media(max-width:820px){ .testi-grid{ grid-template-columns:1fr; } }
+
+  /* pricing */
+  .price-wrap { display:flex; justify-content:center; }
+  .price-card { max-width:460px; width:100%; background:var(--surface); border:1px solid var(--accent); border-radius:var(--radius-lg); padding:36px; position:relative; box-shadow:0 0 0 1px rgba(227,166,61,0.08), var(--shadow-lg); }
+  .price-ribbon { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:#1a1305; font-size:11px; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; padding:5px 14px; border-radius:999px; }
+  .price-card h3 { font-family:var(--font-display); font-size:19px; font-weight:600; text-align:center; margin-top:8px; }
+  .price-amount { display:flex; align-items:baseline; justify-content:center; gap:10px; margin:18px 0 6px; }
+  .price-amount .old { font-size:18px; color:var(--text-quaternary); text-decoration:line-through; }
+  .price-amount .new { font-family:var(--font-display); font-size:46px; font-weight:700; }
+  .price-note { text-align:center; font-size:12.5px; color:var(--text-tertiary); margin-bottom:26px; }
+  .price-feats { list-style:none; margin-bottom:26px; }
+  .price-feats li { display:flex; gap:10px; font-size:13.5px; color:var(--text-secondary); margin-bottom:11px; align-items:flex-start; }
+  .price-feats li::before { content:"âœ“"; color:var(--positive); font-weight:700; flex-shrink:0; }
+  .price-card .btn { width:100%; }
+  .price-guarantee { text-align:center; font-size:12px; color:var(--text-tertiary); margin-top:16px; }
+
+  /* faq */
+  .faq-item { border-bottom:1px solid var(--border); }
+  .faq-q { width:100%; background:none; border:none; text-align:left; padding:18px 0; font-family:var(--font-sans); font-size:14.5px; font-weight:600; color:var(--text-primary); cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .faq-q .chev { color:var(--text-tertiary); transition:transform var(--transition); flex-shrink:0; }
+  .faq-item.open .faq-q .chev { transform:rotate(45deg); }
+  .faq-a { max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
+  .faq-item.open .faq-a { max-height:200px; }
+  .faq-a p { font-size:13.5px; color:var(--text-secondary); padding-bottom:18px; max-width:640px; }
+
+  /* final cta + footer */
+  .final-cta { text-align:center; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl); padding:56px 28px; position:relative; overflow:hidden; }
+  .final-cta::before { content:""; position:absolute; top:-60%; left:50%; transform:translateX(-50%); width:600px; height:400px; background:radial-gradient(circle,rgba(227,166,61,0.16),transparent 70%); pointer-events:none; }
+  .final-cta h2 { font-family:var(--font-display); font-size:28px; margin-bottom:12px; letter-spacing:-0.4px; position:relative; }
+  .final-cta p { color:var(--text-secondary); font-size:14.5px; margin-bottom:26px; position:relative; }
+  .final-cta .btn { position:relative; }
+  .l-footer { border-top:1px solid var(--border); padding:32px 28px; }
+  .l-footer-inner { max-width:var(--wrap); margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:12.5px; color:var(--text-tertiary); }
+
+  /* ============ URGENCY BAR ============ */
+  .urgency-bar { background:linear-gradient(90deg,#1a1305,#221a08); border-bottom:1px solid var(--accent); padding:9px 20px; text-align:center; font-size:12.5px; color:var(--accent-strong); position:relative; z-index:90; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; overflow:hidden; }
+  .urgency-bar::before { content:""; position:absolute; inset:0; background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,0.10) 50%,transparent 60%); background-size:220% 100%; animation:urgencySheen 5s ease-in-out infinite; pointer-events:none; }
+  @keyframes urgencySheen { 0%{ background-position:120% 0; } 100%{ background-position:-20% 0; } }
+  .urgency-bar strong { color:var(--text-primary); }
+  .urgency-bar .countdown { font-family:var(--font-mono); font-weight:600; background:rgba(227,166,61,0.14); padding:2px 9px; border-radius:6px; color:var(--accent-strong); letter-spacing:0.5px; }
+  @media(max-width:600px){ .urgency-bar{ font-size:11.5px; padding:8px 14px; } }
+  @media (prefers-reduced-motion: reduce) { .urgency-bar::before { animation:none; } }
+
+  /* ============ HERO GLOW ============ */
+  .l-hero-wrap { position:relative; overflow:hidden; }
+  .l-hero-wrap::before { content:""; position:absolute; top:-180px; left:-120px; width:480px; height:480px; background:radial-gradient(circle,rgba(141,124,240,0.16),transparent 70%); pointer-events:none; z-index:0; animation:heroGlowDrift 16s ease-in-out infinite; }
+  .l-hero-wrap::after { content:""; position:absolute; top:-100px; right:-140px; width:520px; height:520px; background:radial-gradient(circle,rgba(255,107,74,0.12),transparent 70%); pointer-events:none; z-index:0; animation:heroGlowDrift 19s ease-in-out infinite reverse; }
+  @keyframes heroGlowDrift { 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(30px,20px); } }
+  @media (prefers-reduced-motion: reduce) { .l-hero-wrap::before, .l-hero-wrap::after { animation:none; } }
+  .l-hero, .l-hero * { position:relative; z-index:1; }
+  .l-hero-badge { display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:600; color:var(--positive); background:var(--positive-soft); border:1px solid rgba(52,211,153,0.28); padding:6px 13px; border-radius:999px; margin-bottom:16px; }
+
+  /* ============ MEDIA SHOWCASE (real AI results) ============ */
+  .showcase-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .showcase-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:transform var(--transition), border-color var(--transition); }
+  .showcase-card:hover { transform:translateY(-4px); border-color:var(--text-quaternary); }
+  .showcase-media { position:relative; aspect-ratio:4/5; background:#000; overflow:hidden; }
+  .showcase-media img, .showcase-media video { width:100%; height:100%; object-fit:cover; display:block; }
+  .showcase-tag { position:absolute; top:10px; left:10px; font-family:var(--font-mono); font-size:10px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; padding:4px 9px; border-radius:6px; backdrop-filter:blur(6px); background:rgba(11,13,18,0.6); border:1px solid rgba(255,255,255,0.12); }
+  .showcase-play { position:absolute; bottom:10px; right:10px; display:flex; align-items:center; gap:5px; font-size:10px; font-weight:600; color:#fff; background:rgba(11,13,18,0.65); border:1px solid rgba(255,255,255,0.14); padding:4px 9px; border-radius:6px; backdrop-filter:blur(6px); }
+  .showcase-body { padding:14px 16px 16px; }
+  .showcase-body h4 { font-size:13.5px; font-weight:600; margin-bottom:4px; }
+  .showcase-body p { font-size:12px; color:var(--text-tertiary); margin:0; }
+  @media(max-width:900px){ .showcase-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:520px){ .showcase-grid{ grid-template-columns:1fr; } }
+
+  /* ============ VALUE STACK ============ */
+  .value-stack { list-style:none; margin-bottom:22px; border:1px dashed var(--border); border-radius:var(--radius-md); padding:16px 18px; }
+  .value-stack li { display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--text-secondary); padding:8px 0; border-bottom:1px solid var(--border); gap:10px; }
+  .value-stack li:last-child { border-bottom:none; }
+  .value-stack .v { font-family:var(--font-mono); color:var(--text-tertiary); flex-shrink:0; }
+  .value-stack .total-row { padding-top:12px; margin-top:2px; border-top:1px solid var(--border); font-weight:700; color:var(--text-primary); font-size:14px; }
+  .value-stack .total-row .v { color:var(--text-quaternary); text-decoration:line-through; }
+
+  /* ============ BONUS CARDS ============ */
+  .bonus-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .bonus-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px; position:relative; }
+  .bonus-card .bonus-ribbon { position:absolute; top:14px; right:14px; font-family:var(--font-mono); font-size:10px; font-weight:700; color:var(--accent); background:var(--accent-soft); padding:3px 8px; border-radius:5px; letter-spacing:0.4px; }
+  .bonus-card h4 { font-size:14.5px; font-weight:600; margin:6px 0 8px; padding-right:60px; }
+  .bonus-card p { font-size:13px; color:var(--text-secondary); margin:0; }
+  .bonus-card .bval { font-family:var(--font-mono); font-size:11.5px; color:var(--text-tertiary); margin-top:10px; }
+  @media(max-width:820px){ .bonus-grid{ grid-template-columns:1fr; } }
+
+  /* ============ PRÃ“XIMOS CURSOS ============ */
+  .upcoming-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .upcoming-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:22px; position:relative; overflow:hidden; transition:transform var(--transition), border-color var(--transition); }
+  .upcoming-card:hover { transform:translateY(-3px); border-color:var(--text-quaternary); }
+  .upcoming-card::before { content:""; position:absolute; inset:0; opacity:0; background:linear-gradient(160deg,rgba(255,255,255,0.05),transparent 60%); transition:opacity var(--transition); }
+  .upcoming-card:hover::before { opacity:1; }
+  .upcoming-tag { display:inline-block; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; padding:4px 10px; border-radius:999px; margin-bottom:12px; }
+  .upcoming-card h4 { font-size:15px; font-weight:600; margin-bottom:8px; }
+  .upcoming-card p { font-size:13px; color:var(--text-secondary); margin:0; }
+  .upcoming-note { text-align:center; font-size:12.5px; color:var(--text-tertiary); margin-top:22px; }
+  @media(max-width:820px){ .upcoming-grid{ grid-template-columns:1fr; } }
+
+  /* ============ TRUST STRIP ============ */
+  .trust-strip { display:flex; justify-content:center; gap:34px; flex-wrap:wrap; margin-top:20px; padding-top:20px; border-top:1px solid var(--border); }
+  .trust-strip-item { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-tertiary); }
+  .trust-strip-item .ic { width:16px; height:16px; flex-shrink:0; color:var(--positive); }
+
+  /* ============ HOW IT WORKS ============ */
+  .how-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; }
+  .how-grid::before { content:""; position:absolute; top:23px; left:12%; right:12%; height:1px; background:repeating-linear-gradient(90deg,var(--border) 0 8px,transparent 8px 14px); z-index:0; }
+  .how-card { position:relative; z-index:1; }
+  .how-num { width:46px; height:46px; border-radius:50%; background:var(--surface); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:17px; color:var(--accent); margin-bottom:16px; }
+  .how-card h4 { font-size:15px; font-weight:600; margin-bottom:8px; }
+  .how-card p { font-size:13.5px; color:var(--text-secondary); margin:0; max-width:280px; }
+  @media(max-width:820px){ .how-grid{ grid-template-columns:1fr; } .how-grid::before{ display:none; } }
+
+  /* ============ ANIMATED GRADIENT HEADLINE ============ */
+  @keyframes gradientShift { 0%,100%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } }
+  .grad-text { background:linear-gradient(90deg,var(--track-img),var(--track-vid),var(--track-aud),var(--track-ads),var(--track-img)); background-size:300% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:gradientShift 6s linear infinite; font-style:normal; }
+  .cycle-word-wrap { display:inline-block; position:relative; min-width:1ch; }
+  .cycle-word { display:inline-block; }
+
+  /* ============ FLOATING PARTICLES ============ */
+  @keyframes floatUp { 0%{ transform:translateY(0) translateX(0); opacity:0; } 10%{ opacity:1; } 90%{ opacity:1; } 100%{ transform:translateY(-140px) translateX(var(--drift,20px)); opacity:0; } }
+  .particle-field { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .particle { position:absolute; bottom:0; width:4px; height:4px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px 2px rgba(227,166,61,0.5); animation:floatUp linear infinite; opacity:0; }
+
+  /* ============ LIVE AI DEMO WIDGET ============ */
+  .ai-demo { background:#0a0c10; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg), 0 0 60px -20px rgba(141,124,240,0.35); position:relative; }
+  .ai-demo-bar { display:flex; align-items:center; gap:6px; padding:10px 14px; background:var(--surface-raised); border-bottom:1px solid var(--border); }
+  .ai-demo-bar span { width:9px; height:9px; border-radius:50%; background:var(--border); }
+  .ai-demo-bar .lbl { margin-left:8px; font-family:var(--font-mono); font-size:11px; color:var(--text-tertiary); }
+  .ai-demo-body { padding:20px; min-height:64px; }
+  .ai-demo-prompt { font-family:var(--font-mono); font-size:13px; color:var(--positive); white-space:pre-wrap; }
+  .ai-demo-prompt .cursor { display:inline-block; width:7px; height:15px; background:var(--positive); vertical-align:middle; margin-left:2px; animation:blink 0.9s steps(1) infinite; }
+  @keyframes blink { 50%{ opacity:0; } }
+  .ai-demo-progress { display:none; align-items:center; gap:10px; margin-top:16px; font-family:var(--font-mono); font-size:11.5px; color:var(--text-tertiary); }
+  .ai-demo-progress.show { display:flex; }
+  .ai-demo-bar-track { flex:1; height:5px; border-radius:99px; background:var(--surface-raised); overflow:hidden; }
+  .ai-demo-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--track-img),var(--track-vid)); border-radius:99px; transition:width 1.6s cubic-bezier(.4,0,.2,1); }
+  .ai-demo-result { display:none; margin-top:16px; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border); animation:fadeInResult .6s ease both; }
+  .ai-demo-result.show { display:block; }
+  @keyframes fadeInResult { from{ opacity:0; transform:scale(.97); } to{ opacity:1; transform:scale(1); } }
+  .ai-demo-result img { width:100%; display:block; max-height:220px; object-fit:cover; }
+
+  /* ============ ANIMATED COUNTERS ============ */
+  .count-up { font-variant-numeric:tabular-nums; }
+
+  /* ============ TOOLS MARQUEE ============ */
+  .marquee-wrap { overflow:hidden; position:relative; padding:22px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  .marquee-track { display:flex; gap:14px; width:max-content; animation:marqueeScroll 32s linear infinite; }
+  @keyframes marqueeScroll { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  .marquee-chip { flex-shrink:0; display:flex; align-items:center; gap:8px; padding:8px 16px; border:1px solid var(--border); border-radius:999px; font-size:12.5px; color:var(--text-secondary); background:var(--surface); white-space:nowrap; }
+  .marquee-chip .dot2 { width:6px; height:6px; border-radius:50%; }
+
+  /* ============ CARD TILT / DYNAMIC HOVER ============ */
+  .showcase-card, .tool-card { transform-style:preserve-3d; will-change:transform; }
+  .showcase-card:hover { transform:translateY(-6px) scale(1.015); }
+  .tool-card:hover { transform:translateY(-3px) scale(1.01); }
+  .bonus-card, .how-card, .problem-card { transition:transform var(--transition), border-color var(--transition); }
+  .bonus-card:hover, .how-card:hover { transform:translateY(-3px); }
+
+  /* ============ CURSOR SPOTLIGHT (sigue el mouse) ============ */
+  #cursorGlow { position:fixed; top:0; left:0; width:520px; height:520px; border-radius:50%; pointer-events:none; z-index:5; transform:translate(calc(var(--mx,50vw) - 260px), calc(var(--my,40vh) - 260px)); background:radial-gradient(circle,rgba(227,166,61,0.10),rgba(141,124,240,0.06) 45%,transparent 72%); mix-blend-mode:screen; transition:opacity .3s ease; opacity:0; }
+  #cursorGlow.active { opacity:1; }
+  @media(max-width:900px){ #cursorGlow{ display:none; } }
+
+  /* ============ 3D TILT ============ */
+  .tilt { transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease; }
+
+  /* ============ STAGGERED SCROLL REVEAL ============ */
+  .reveal.in-view .stagger-grid > * { animation:staggerIn .55s cubic-bezier(.2,.8,.2,1) both; }
+  .reveal.in-view .stagger-grid > *:nth-child(1){ animation-delay:.02s; } .reveal.in-view .stagger-grid > *:nth-child(2){ animation-delay:.09s; }
+  .reveal.in-view .stagger-grid > *:nth-child(3){ animation-delay:.16s; } .reveal.in-view .stagger-grid > *:nth-child(4){ animation-delay:.23s; }
+  .reveal.in-view .stagger-grid > *:nth-child(5){ animation-delay:.30s; } .reveal.in-view .stagger-grid > *:nth-child(6){ animation-delay:.37s; }
+  @keyframes staggerIn { from{ opacity:0; transform:translateY(18px) scale(.98); } to{ opacity:1; transform:translateY(0) scale(1); } }
+
+  /* ============ CLICK BURST ============ */
+  .burst-particle { position:fixed; z-index:400; border-radius:50%; pointer-events:none; animation:burstOut .7s cubic-bezier(.2,.7,.3,1) forwards; }
+  @keyframes burstOut { from{ transform:translate(0,0) scale(1); opacity:1; } to{ transform:translate(var(--bx), var(--by)) scale(0); opacity:0; } }
+
+  /* ============ MAGNETIC BUTTON GLOW ON HOVER ============ */
+  .btn-primary { position:relative; overflow:hidden; }
+  .btn-primary::after { content:""; position:absolute; inset:0; background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.25) 50%,transparent 70%); transform:translateX(-120%); transition:transform .7s ease; }
+  .btn-primary:hover::after { transform:translateX(120%); }
+  /* ============ HERO AURA (mesh glow, reemplaza la red de lÃ­neas) ============ */
+  .hero-aura { position:absolute; inset:-10%; z-index:0; pointer-events:none; filter:blur(60px); opacity:0.55; }
+  .hero-aura span { position:absolute; border-radius:50%; mix-blend-mode:screen; }
+  .hero-aura span:nth-child(1) { width:340px; height:340px; top:0; left:8%; background:var(--track-img); animation:auraDrift1 14s ease-in-out infinite; }
+  .hero-aura span:nth-child(2) { width:300px; height:300px; top:30%; right:6%; background:var(--track-vid); animation:auraDrift2 17s ease-in-out infinite; }
+  .hero-aura span:nth-child(3) { width:260px; height:260px; bottom:-8%; left:34%; background:var(--track-aud); animation:auraDrift3 12s ease-in-out infinite; }
+  @keyframes auraDrift1 { 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(40px,30px) scale(1.15); } }
+  @keyframes auraDrift2 { 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-30px,25px) scale(1.1); } }
+  @keyframes auraDrift3 { 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(25px,-35px) scale(1.2); } }
+  @media(max-width:900px){ .hero-aura{ opacity:0.35; } }
+  @media (prefers-reduced-motion: reduce) { .hero-aura span { animation:none; } }
+
+  /* ============ HOW-CARD ICONS ============ */
+  .how-icon { width:46px; height:46px; margin-bottom:16px; }
+  .how-icon svg { width:100%; height:100%; overflow:visible; }
+  .how-icon .draw { stroke-dasharray:120; stroke-dashoffset:120; transition:stroke-dashoffset 1s ease; }
+  .reveal.in-view .how-icon .draw { stroke-dashoffset:0; }
+
+  /* ============ WAVE DIVIDER ============ */
+  .wave-divider { max-width:var(--wrap); margin:0 auto; padding:6px 28px 26px; }
+  .wave-divider svg { width:100%; height:36px; display:block; }
+  .wave-path { stroke-dasharray:1400; stroke-dashoffset:1400; transition:stroke-dashoffset 1.4s ease; }
+  .reveal.in-view .wave-path { stroke-dashoffset:0; }
+
+  /* ============ PARA QUIÃ‰N ES / NO ES ============ */
+  .fit-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .fit-card { border-radius:var(--radius-lg); padding:26px 24px; border:1px solid var(--border); }
+  .fit-card.yes { background:var(--positive-soft); border-color:rgba(52,211,153,0.3); }
+  .fit-card.no { background:var(--surface); }
+  .fit-card h4 { font-size:15px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .fit-card ul { list-style:none; }
+  .fit-card li { display:flex; gap:9px; font-size:13.5px; color:var(--text-secondary); margin-bottom:10px; align-items:flex-start; line-height:1.5; }
+  .fit-card.yes li::before { content:"âœ“"; color:var(--positive); font-weight:700; flex-shrink:0; }
+  .fit-card.no li::before { content:"âœ•"; color:var(--text-quaternary); font-weight:700; flex-shrink:0; }
+  @media(max-width:760px){ .fit-grid{ grid-template-columns:1fr; } }
+
+  /* ============ SOCIAL PROOF TOAST ============ */
+  .proof-toast { position:fixed; left:18px; bottom:18px; z-index:180; display:flex; align-items:center; gap:11px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:12px 16px 12px 12px; box-shadow:var(--shadow-lg); max-width:300px; transform:translateY(20px); opacity:0; pointer-events:none; transition:transform .4s cubic-bezier(.2,.8,.2,1), opacity .4s ease; }
+  .proof-toast.show { transform:translateY(0); opacity:1; }
+  .proof-toast .pt-avatar { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; flex-shrink:0; }
+  .proof-toast .pt-text { font-size:12px; color:var(--text-secondary); line-height:1.4; }
+  .proof-toast .pt-text strong { color:var(--text-primary); }
+  .proof-toast .pt-time { font-size:10.5px; color:var(--text-quaternary); margin-top:2px; }
+  @media(max-width:600px){ .proof-toast{ left:10px; right:10px; max-width:none; bottom:74px; } }
+
+  /* ============ GUARANTEE SECTION ============ */
+  .guarantee-wrap { display:flex; gap:32px; align-items:center; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl); padding:36px; }
+  .guarantee-badge { flex-shrink:0; width:110px; height:110px; border-radius:50%; border:2px dashed var(--positive); display:flex; align-items:center; justify-content:center; text-align:center; color:var(--positive); font-family:var(--font-display); font-weight:700; font-size:13px; line-height:1.3; }
+  .guarantee-steps { display:flex; flex-direction:column; gap:10px; flex:1; }
+  .guarantee-steps .g-step { display:flex; gap:10px; font-size:13.5px; color:var(--text-secondary); align-items:flex-start; }
+  .guarantee-steps .g-step b { color:var(--text-primary); flex-shrink:0; }
+  @media(max-width:700px){ .guarantee-wrap{ flex-direction:column; text-align:center; } }
+
+  /* ============ CHECKOUT MODAL ============ */
+  #checkoutOverlay { position:fixed; inset:0; z-index:500; background:rgba(6,7,10,0.72); backdrop-filter:blur(6px); display:none; align-items:flex-start; justify-content:center; padding:40px 16px; overflow-y:auto; }
+  #checkoutOverlay.open { display:flex; }
+  .checkout-modal { width:100%; max-width:460px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl); box-shadow:var(--shadow-lg); overflow:hidden; animation:modalIn .3s cubic-bezier(.2,.8,.2,1); }
+  @keyframes modalIn { from{ opacity:0; transform:translateY(16px) scale(.98); } to{ opacity:1; transform:translateY(0) scale(1); } }
+  .checkout-head { display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--border); }
+  .checkout-head .brand { display:flex; align-items:center; gap:9px; font-family:var(--font-display); font-weight:700; font-size:15px; }
+  .checkout-close { width:28px; height:28px; border-radius:50%; border:1px solid var(--border); background:var(--surface-raised); color:var(--text-secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px; }
+  .checkout-close:hover { color:var(--text-primary); }
+  .checkout-body { padding:22px 22px 24px; }
+  .checkout-summary { display:flex; justify-content:space-between; align-items:center; background:var(--surface-raised); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px 16px; margin-bottom:20px; }
+  .checkout-summary .cs-name { font-size:13px; color:var(--text-secondary); }
+  .checkout-summary .cs-price { font-family:var(--font-display); font-weight:700; font-size:19px; }
+  .checkout-summary .cs-old { font-size:12px; color:var(--text-quaternary); text-decoration:line-through; margin-right:6px; }
+  .co-field { margin-bottom:14px; }
+  .co-field label { display:block; font-size:12px; color:var(--text-tertiary); margin-bottom:6px; }
+  .co-field input { width:100%; background:var(--surface-raised); border:1px solid var(--border); border-radius:8px; padding:11px 12px; color:var(--text-primary); font-size:13.5px; font-family:inherit; }
+  .co-field input:focus { outline:none; border-color:var(--accent); }
+  .co-row { display:flex; gap:12px; }
+  .co-row .co-field { flex:1; }
+  .pay-tabs { display:flex; gap:8px; margin-bottom:16px; }
+  .pay-tab { flex:1; text-align:center; padding:10px; border:1px solid var(--border); border-radius:8px; font-size:12.5px; color:var(--text-secondary); cursor:pointer; transition:border-color .2s, color .2s; }
+  .pay-tab.active { border-color:var(--accent); color:var(--text-primary); background:var(--accent-soft); }
+  .pay-panel { display:none; }
+  .pay-panel.active { display:block; }
+  .co-note { display:flex; gap:8px; align-items:flex-start; font-size:11px; color:var(--text-quaternary); line-height:1.5; margin:4px 0 18px; }
+  .checkout-guarantee { display:flex; align-items:center; gap:8px; justify-content:center; font-size:11.5px; color:var(--text-tertiary); margin-top:14px; }
+  .checkout-success { display:none; text-align:center; padding:12px 0 4px; }
+  .checkout-success.show { display:block; }
+  .checkout-success .cs-icon { width:56px; height:56px; margin:0 auto 16px; border-radius:50%; background:var(--positive-soft); display:flex; align-items:center; justify-content:center; color:var(--positive); font-size:26px; }
+  .checkout-success h3 { font-size:17px; margin-bottom:8px; }
+  .checkout-success p { font-size:13px; color:var(--text-secondary); margin-bottom:20px; line-height:1.6; }
+  .checkout-form.hide-on-success { display:block; }
+  .checkout-form.hide-on-success.hidden { display:none; }
+  .checkout-tabs { display:grid; grid-template-columns:1fr 1fr; gap:6px; background:var(--surface-raised); border:1px solid var(--border); border-radius:8px; padding:4px; margin-bottom:18px; }
+  .checkout-tab { border:0; border-radius:6px; background:transparent; color:var(--text-tertiary); padding:9px 10px; font:inherit; font-size:12.5px; cursor:pointer; }
+  .checkout-tab.active { background:var(--surface); color:var(--text-primary); box-shadow:0 0 0 1px var(--border); }
+  .checkout-mode-login .co-register-only { display:none; }
+  .app-notice { display:none; background:rgba(227,166,61,0.10); border:1px solid rgba(227,166,61,0.30); color:var(--text-secondary); border-radius:var(--radius-md); padding:12px 14px; font-size:12.5px; line-height:1.55; margin-bottom:16px; }
+  .app-notice.show { display:block; }
+  .payment-banner { display:none; align-items:center; justify-content:space-between; gap:14px; background:linear-gradient(135deg, rgba(227,166,61,0.16), rgba(141,124,240,0.10)); border:1px solid rgba(227,166,61,0.35); border-radius:var(--radius-lg); padding:16px 18px; margin-bottom:18px; }
+  .payment-banner.show { display:flex; }
+  .payment-banner h3 { font-size:15px; margin-bottom:4px; }
+  .payment-banner p { font-size:12.5px; color:var(--text-secondary); line-height:1.5; margin:0; }
+  @media(max-width:700px){ .payment-banner { align-items:stretch; flex-direction:column; } }
+  .student-chip { display:none; align-items:center; gap:7px; font-size:12px; color:var(--text-secondary); background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:8px 12px; }
+  .student-chip.show { display:inline-flex; }
+  .cert-locked { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px; text-align:center; margin-bottom:18px; }
+  .cert-locked h3 { font-family:var(--font-display); font-size:18px; margin-bottom:8px; }
+  .cert-locked p { color:var(--text-secondary); font-size:13.5px; max-width:520px; margin:0 auto 18px; }
+  .cert-locked.hidden, .cert-content.hidden { display:none; }
+
+  /* ============ CERTIFICADO ============ */
+  .cert-wrap { background:radial-gradient(circle at 30% 20%, rgba(227,166,61,0.08), transparent 60%), var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl); padding:8px; }
+  .cert-inner { border:2px solid var(--accent); border-radius:calc(var(--radius-xl) - 6px); padding:48px 40px; text-align:center; position:relative; }
+  .cert-inner::before, .cert-inner::after { content:""; position:absolute; width:26px; height:26px; border:2px solid var(--accent); opacity:.6; }
+  .cert-inner::before { top:10px; left:10px; border-right:none; border-bottom:none; }
+  .cert-inner::after { bottom:10px; right:10px; border-left:none; border-top:none; }
+  .cert-brand { font-family:var(--font-display); font-weight:700; font-size:15px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-strong); margin-bottom:22px; }
+  .cert-kicker { font-family:var(--font-mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:10px; }
+  .cert-title { font-family:var(--font-display); font-size:15px; color:var(--text-tertiary); margin-bottom:6px; }
+  .cert-name-input { background:transparent; border:none; border-bottom:2px solid var(--accent); text-align:center; font-family:var(--font-display); font-size:32px; font-weight:700; color:var(--text-primary); padding:6px 10px; margin:8px auto 18px; display:block; width:90%; max-width:440px; }
+  .cert-name-input:focus { outline:none; }
+  .cert-desc { font-size:13.5px; color:var(--text-secondary); max-width:440px; margin:0 auto 24px; line-height:1.7; }
+  .cert-desc strong { color:var(--text-primary); }
+  .cert-footer { display:flex; justify-content:space-between; align-items:flex-end; margin-top:32px; padding-top:20px; border-top:1px dashed var(--border); }
+  .cert-sig { text-align:left; }
+  .cert-sig .line { font-family:var(--font-display); font-size:18px; font-style:italic; color:var(--track-vid); margin-bottom:4px; }
+  .cert-sig .cap { font-size:10.5px; color:var(--text-quaternary); text-transform:uppercase; letter-spacing:0.5px; }
+  .cert-seal { width:64px; height:64px; border-radius:50%; border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:10px; color:var(--accent); text-align:center; line-height:1.2; flex-shrink:0; }
+  .cert-date { text-align:right; font-size:10.5px; color:var(--text-quaternary); }
+  @media(max-width:600px){ .cert-inner{ padding:30px 18px; } .cert-name-input{ font-size:22px; } .cert-footer{ flex-direction:column; gap:16px; align-items:center; text-align:center; } }
+  @media print {
+    body * { visibility:hidden; }
+    #page-certificado, #page-certificado * { visibility:visible; }
+    #page-certificado { position:absolute; top:0; left:0; width:100%; }
+    .action-row, .page-eyebrow, .page-subtitle { display:none !important; }
+  }
+  /* ============ PREMIUM GLOW BORDER (buy-box) ============ */
+  .buy-box { position:relative; z-index:1; }
+  .buy-box::before { content:""; position:absolute; inset:-1px; border-radius:inherit; z-index:-1; padding:1px;
+    background:linear-gradient(135deg, var(--track-img), var(--track-vid) 35%, var(--track-aud) 65%, var(--track-ads));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    opacity:0.9; }
+  .buy-box::after { content:""; position:absolute; inset:-24px; border-radius:inherit; z-index:-2; pointer-events:none;
+    background:radial-gradient(circle at 30% 0%, rgba(227,166,61,0.28), transparent 60%);
+    animation:buyBoxBreathe 4s ease-in-out infinite; }
+  @keyframes buyBoxBreathe { 0%,100%{ opacity:0.5; transform:scale(1); } 50%{ opacity:0.95; transform:scale(1.04); } }
+
+  /* ============ MORPHING BLOB ============ */
+  .blob-decor { position:absolute; width:420px; height:420px; filter:blur(50px); opacity:0.16; pointer-events:none; z-index:0; }
+  .blob-decor svg { width:100%; height:100%; }
+  .blob-shape { animation:blobMorph 9s ease-in-out infinite alternate, blobSpin 22s linear infinite; transform-origin:center; }
+  @keyframes blobSpin { to{ transform:rotate(360deg); } }
+  @keyframes blobMorph {
+    0% { d: path("M300,120 C400,140 460,240 440,340 C420,440 300,480 200,450 C100,420 60,320 90,230 C120,140 200,100 300,120 Z"); }
+    50% { d: path("M290,100 C410,110 470,220 430,330 C390,440 260,470 180,420 C100,370 80,250 130,170 C180,90 170,90 290,100 Z"); }
+    100% { d: path("M310,130 C390,160 450,260 420,360 C390,460 270,470 190,430 C110,390 70,280 110,190 C150,100 230,100 310,130 Z"); }
+  }
+
+  /* ============ PARALLAX SUPPORT ============ */
+  .parallax-el { will-change:transform; transition:transform .1s linear; }
+
+  .spots-left { display:flex; align-items:center; gap:8px; justify-content:center; font-size:12px; color:var(--warning); margin-top:10px; }
+  .spots-left .bar { width:80px; height:5px; border-radius:99px; background:var(--surface-raised); overflow:hidden; }
+  .spots-left .bar-fill { height:100%; width:78%; background:var(--warning); border-radius:99px; }
+
+  .live-pulse { display:inline-flex; align-items:center; gap:6px; }
+  .live-pulse .dotp { width:7px; height:7px; border-radius:50%; background:var(--positive); box-shadow:0 0 0 0 rgba(52,211,153,0.6); animation:pulseDot 1.6s ease-out infinite; }
+  @keyframes pulseDot { 0%{ box-shadow:0 0 0 0 rgba(52,211,153,0.55); } 70%{ box-shadow:0 0 0 9px rgba(52,211,153,0); } 100%{ box-shadow:0 0 0 0 rgba(52,211,153,0); } }
+  .sticky-cta { display:none; position:fixed; left:0; right:0; bottom:0; z-index:200; background:rgba(11,13,18,0.92); backdrop-filter:blur(14px); border-top:1px solid var(--border); padding:10px 16px; align-items:center; justify-content:space-between; gap:12px; }
+  .sticky-cta .p { font-size:12px; color:var(--text-secondary); }
+  .sticky-cta .p strong { display:block; color:var(--text-primary); font-size:14px; }
+  .sticky-cta .btn { flex-shrink:0; white-space:nowrap; }
+  @media(max-width:760px){ .sticky-cta.show{ display:flex; } body{ padding-bottom:64px; } }
+
+  /* ============ BUY BOX (hero) ============ */
+  .buy-box { background:var(--surface); border:1px solid var(--accent); border-radius:var(--radius-xl); padding:26px 26px 24px; box-shadow:0 0 0 1px rgba(227,166,61,0.08), var(--shadow-lg); }
+  .buy-box-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .buy-box-badge { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:0.5px; color:var(--accent-strong); text-transform:uppercase; }
+  .buy-box-off { background:var(--track-ads); color:#fff; font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:999px; box-shadow:0 0 0 0 rgba(255,107,74,0.5); animation:offPulse 2.2s ease-out infinite; }
+  @keyframes offPulse { 0%{ box-shadow:0 0 0 0 rgba(255,107,74,0.45); } 70%{ box-shadow:0 0 0 8px rgba(255,107,74,0); } 100%{ box-shadow:0 0 0 0 rgba(255,107,74,0); } }
+  @media (prefers-reduced-motion: reduce) { .buy-box-off { animation:none; } }
+  .buy-box-price { display:flex; align-items:baseline; gap:10px; margin-bottom:4px; }
+  .buy-box-price .old { font-size:17px; color:var(--text-quaternary); text-decoration:line-through; }
+  .buy-box-price .new { font-family:var(--font-display); font-size:38px; font-weight:700; }
+  .buy-box-cuotas { font-size:12.5px; color:var(--text-secondary); margin-bottom:16px; }
+  .buy-box-feats { list-style:none; margin-bottom:16px; }
+  .buy-box-feats li { display:flex; gap:9px; font-size:13px; color:var(--text-secondary); margin-bottom:9px; align-items:flex-start; }
+  .buy-box-feats li::before { content:"âœ“"; color:var(--positive); font-weight:700; flex-shrink:0; }
+  .buy-box-countdown { display:flex; align-items:center; justify-content:center; gap:8px; background:var(--surface-raised); border:1px solid var(--border); border-radius:var(--radius-md); padding:10px; margin-bottom:14px; font-family:var(--font-mono); font-size:12.5px; color:var(--warning); }
+  .buy-box .btn { width:100%; }
+  .buy-box-guarantee { text-align:center; font-size:11.5px; color:var(--text-tertiary); margin-top:12px; }
+
+  /* ============ ROI / SAVINGS TABLE ============ */
+  .roi-wrap { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
+  .roi-table { width:100%; border-collapse:collapse; font-size:13.5px; margin:0; }
+  .roi-table th { background:var(--surface-raised); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; padding:14px 16px; }
+  .roi-table th:nth-child(2) { color:var(--positive); }
+  .roi-table th:nth-child(3) { color:var(--text-tertiary); }
+  .roi-table td { padding:13px 16px; border-bottom:1px solid var(--border); color:var(--text-secondary); }
+  .roi-table td.yes { color:var(--positive); font-weight:600; }
+  .roi-table td.no { color:var(--text-tertiary); }
+  .roi-table tr:last-child td { border-bottom:none; font-weight:700; color:var(--text-primary); background:var(--surface-raised); }
+  .roi-table tr:last-child td.yes { color:var(--positive); }
+
+  /* ============ RATING BADGE ============ */
+  .rating-badge { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:24px; font-size:13px; color:var(--text-secondary); }
+  .rating-badge .stars { color:var(--warning); font-size:15px; letter-spacing:2px; }
+  .rating-badge strong { color:var(--text-primary); }
+
+  /* ============ FREE-VS-PAID BLOCK ============ */
+  .fvp-block { display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; }
+  .fvp-block .fvp-text { flex:1; min-width:280px; font-size:14.5px; color:var(--text-secondary); line-height:1.75; }
+  .fvp-block .fvp-text strong { color:var(--text-primary); }
+  .fvp-badges { display:flex; flex-direction:column; gap:10px; min-width:220px; }
+  .fvp-badge { display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:12px 14px; font-size:13px; }
+  .fvp-badge .n { font-family:var(--font-display); font-weight:700; font-size:15px; }
+
+  /* ============ APP (COURSE PLATFORM) ============ */
+  .app-frame { position:relative; height:100vh; overflow:hidden; border-top:1px solid var(--border); background:var(--bg); }
+  .app { display:flex; height:100%; }
+  .sidebar { width:260px; background:var(--surface); border-right:1px solid var(--border); display:flex; flex-direction:column; position:absolute; top:0; left:0; bottom:0; z-index:20; transition:transform var(--transition); }
+  .sidebar-header { padding:22px 20px 16px; border-bottom:1px solid var(--border); }
+  .sidebar-header h1 { font-family:var(--font-display); font-size:16px; font-weight:700; letter-spacing:-0.2px; display:flex; align-items:center; gap:8px; }
+  .sidebar-header h1 .mark { width:20px; height:20px; border-radius:6px; background:linear-gradient(135deg,var(--track-img),var(--track-vid) 34%,var(--track-aud) 68%,var(--track-ads)); flex-shrink:0; }
+  .sidebar-header p { font-size:12px; color:var(--text-tertiary); margin-top:6px; }
+  .nav-section { padding:14px 14px 6px; font-size:10px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-quaternary); font-weight:600; margin-top:4px; }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:9px 14px; margin:0 8px 3px; border-radius:var(--radius-md); cursor:pointer; font-size:13.5px; color:var(--text-secondary); transition:all var(--transition); border:none; background:transparent; width:calc(100% - 16px); text-align:left; font-family:inherit; }
+  .nav-item:hover { background:var(--surface-raised); color:var(--text-primary); }
+  .nav-item.active { background:var(--surface-strong); color:var(--text-primary); font-weight:500; }
+  .nav-item .nav-num { width:22px; height:22px; border-radius:var(--radius-sm); background:var(--surface-raised); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; flex-shrink:0; color:var(--text-tertiary); transition:all var(--transition); }
+  .nav-item.active .nav-num { background:var(--accent); color:#1a1305; }
+  .nav-item .nav-icon { font-family:var(--font-mono); font-size:10px; flex-shrink:0; width:28px; text-align:center; color:var(--text-tertiary); }
+  .nav-item.active .nav-icon { color:var(--text-primary); }
+  .sidebar-footer { margin-top:auto; padding:16px 20px; border-top:1px solid var(--border); }
+  .progress-label { font-size:11px; color:var(--text-tertiary); margin-bottom:8px; display:flex; justify-content:space-between; }
+  .progress-bar { height:4px; background:var(--surface-raised); border-radius:2px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--accent); border-radius:2px; transition:width 0.4s cubic-bezier(0.4,0,0.2,1); }
+  .back-to-landing { display:block; text-align:center; font-size:11.5px; color:var(--text-tertiary); margin-top:12px; cursor:pointer; }
+  .back-to-landing:hover { color:var(--text-primary); }
+  .main { margin-left:260px; flex:1; height:100%; overflow-y:auto; }
+  .topbar { position:sticky; top:0; background:rgba(15,15,17,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; z-index:10; }
+  .topbar h2 { font-family:var(--font-display); font-size:16px; font-weight:600; }
+  .topbar-actions { display:flex; gap:10px; }
+  .content { padding:28px 32px 60px; max-width:900px; }
+  .page { display:none; }
+  .page.active { display:block; animation:fadeIn 0.3s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+  .page-eyebrow { display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; letter-spacing:1.2px; text-transform:uppercase; font-weight:600; margin-bottom:10px; }
+  .page-eyebrow .d { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+  .page-title { font-family:var(--font-display); font-size:25px; font-weight:700; margin-bottom:6px; letter-spacing:-0.4px; }
+  .page-subtitle { font-size:14px; color:var(--text-secondary); margin-bottom:24px; max-width:640px; }
+  h3 { font-family:var(--font-display); font-size:16px; font-weight:600; margin:30px 0 12px; display:flex; align-items:center; gap:8px; }
+  h3 .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  p { font-size:14px; color:var(--text-secondary); line-height:1.7; margin-bottom:12px; }
+  p strong { color:var(--text-primary); font-weight:600; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; margin-bottom:24px; }
+  .tool-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; transition:all var(--transition); }
+  .tool-card:hover { border-color:var(--text-quaternary); transform:translateY(-1px); box-shadow:var(--shadow); }
+  .tag-row { display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap; }
+  .tag { font-size:10.5px; padding:3px 8px; border-radius:var(--radius-sm); font-weight:700; text-transform:uppercase; letter-spacing:0.4px; }
+  .tag-gratis { background:var(--positive-soft); color:var(--positive); }
+  .tag-freemium { background:var(--accent-soft); color:var(--accent); }
+  .tag-pago { background:var(--warning-soft); color:var(--warning); }
+  .tool-card h4 { font-size:14px; font-weight:600; margin-bottom:5px; }
+  .tool-card p { font-size:13px; color:var(--text-secondary); line-height:1.55; margin-bottom:0; }
+  .tool-card .price { font-size:12px; color:var(--text-tertiary); margin-top:8px; font-family:var(--font-mono); }
+  .step-list { counter-reset:step; }
+  .step-item { display:flex; gap:14px; margin-bottom:16px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px; transition:border-color var(--transition); }
+  .step-item:hover { border-color:var(--text-quaternary); }
+  .step-item::before { counter-increment:step; content:counter(step); width:26px; height:26px; border-radius:50%; background:var(--surface-strong); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; flex-shrink:0; margin-top:1px; color:var(--text-primary); }
+  .step-body h4 { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .step-body p { font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:0; }
+  .prompt-box { background:var(--surface-raised); border:1px solid var(--border); border-radius:var(--radius-md); padding:14px 16px; font-size:13px; line-height:1.6; color:var(--text-primary); position:relative; margin:10px 0; font-family:var(--font-mono); }
+  .prompt-box code { display:block; white-space:pre-wrap; word-break:break-word; }
+  .copy-btn { position:absolute; top:10px; right:10px; padding:5px 12px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); font-size:11px; cursor:pointer; color:var(--text-tertiary); transition:all var(--transition); font-family:var(--font-sans); font-weight:600; }
+  .copy-btn:hover { background:var(--surface-strong); color:var(--text-primary); }
+  .copy-btn.copied { background:var(--positive); color:#0a1f16; border-color:var(--positive); font-weight:700; }
+  table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:20px; }
+  th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border); }
+  th { font-weight:700; color:var(--text-tertiary); font-size:11px; text-transform:uppercase; letter-spacing:0.6px; background:var(--surface); }
+  td { color:var(--text-secondary); }
+  tr:hover td { background:var(--surface-raised); }
+  .stars { color:var(--warning); font-size:13px; letter-spacing:1px; }
+  .tip-box { background:var(--surface); border-left:3px solid var(--accent); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:14px 18px; font-size:13px; line-height:1.7; color:var(--text-secondary); margin:16px 0 24px; }
+  .tip-box strong { color:var(--text-primary); }
+  .checklist { list-style:none; }
+  .checklist li { display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; font-size:13.5px; color:var(--text-secondary); cursor:pointer; padding:6px 0; transition:color var(--transition); user-select:none; }
+  .checklist li:hover { color:var(--text-primary); }
+  .checklist li::before { content:""; width:16px; height:16px; border:2px solid var(--border); border-radius:4px; flex-shrink:0; margin-top:2px; transition:all var(--transition); }
+  .checklist li.checked::before { background:var(--accent); border-color:var(--accent); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%231a1305' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:center; }
+  .checklist li.checked { color:var(--text-tertiary); text-decoration:line-through; }
+  .result-preview { background:var(--surface); border:1px dashed var(--border); border-radius:var(--radius-md); padding:20px; text-align:center; margin-top:14px; }
+  .result-preview h4 { font-size:14px; font-weight:600; margin-bottom:6px; color:var(--positive); }
+  .result-preview p { font-size:13px; color:var(--text-secondary); margin-bottom:0; }
+  .action-row { display:flex; gap:10px; margin-top:18px; padding-top:18px; border-top:1px solid var(--border); flex-wrap:wrap; }
+  .hero { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; margin-bottom:28px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--track-img),var(--track-vid) 33%,var(--track-aud) 66%,var(--track-ads)); }
+  .hero h1 { font-family:var(--font-display); font-size:27px; font-weight:700; margin-bottom:10px; letter-spacing:-0.5px; }
+  .hero p { font-size:15px; color:var(--text-secondary); max-width:560px; margin:0 auto 20px; }
+  .hero-stats { display:flex; justify-content:center; gap:40px; margin-top:20px; }
+  .hero-stat { text-align:center; }
+  .hero-stat .num { font-family:var(--font-display); font-size:22px; font-weight:700; color:var(--accent); }
+  .hero-stat .label { font-size:12px; color:var(--text-tertiary); margin-top:2px; }
+  .mobile-toggle { display:none; position:absolute; top:14px; left:14px; z-index:30; width:38px; height:38px; border-radius:var(--radius-sm); background:var(--surface); border:1px solid var(--border); color:var(--text-primary); font-size:18px; align-items:center; justify-content:center; cursor:pointer; }
+  @media(max-width:860px) { .sidebar { transform:translateX(-100%); } .sidebar.open { transform:translateX(0); } .main { margin-left:0; } .mobile-toggle { display:flex; } .content { padding:52px 18px 40px; } .card-grid { grid-template-columns:1fr; } .hero-stats { gap:24px; } }
+  .overlay { display:none; position:absolute; inset:0; background:rgba(0,0,0,0.5); z-index:15; }
+  .overlay.show { display:block; }
+  @media print { .app-frame{ height:auto !important; overflow:visible !important; } .sidebar, .topbar, .mobile-toggle, .overlay, .btn, .copy-btn, #landing { display:none !important; } .main { margin-left:0 !important; height:auto !important; overflow:visible !important; } .page { display:block !important; } body { background:#fff; color:#000; } .tool-card, .step-item, .tip-box { break-inside:avoid; } }
+</style>
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!-- ==========================  LANDING  ========================== -->
+<!-- ================================================================ -->
+<div id="landing">
+  <div id="cursorGlow"></div>
+
+  <!-- NotificaciÃ³n de actividad reciente. Reemplaza los nombres por inscripciones reales antes de publicar (o quita este bloque). -->
+  <div class="proof-toast" id="proofToast">
+    <div class="pt-avatar" id="ptAvatar"></div>
+    <div>
+      <div class="pt-text" id="ptText"></div>
+      <div class="pt-time" id="ptTime"></div>
+    </div>
+  </div>
+
+  <!-- Reemplaza o quita esta barra segÃºn tu campaÃ±a real. El contador es ilustrativo (reinicia por sesiÃ³n). -->
+  <div class="urgency-bar">ðŸ”¥ Oferta de lanzamiento â€” el precio vuelve a <strong>$49.900</strong> cuando termine el descuento Â· <span class="countdown" id="countdown">23:59:59</span></div>
+
+  <nav class="l-nav">
+    <div class="l-nav-inner">
+      <div class="l-logo"><span class="mark"></span>AcademIA</div>
+      <div class="l-nav-links">
+        <a href="#temario">Temario</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#herramientas">Herramientas</a>
+        <a href="#precio">Precio</a>
+        <a href="#faq">Preguntas</a>
+      </div>
+      <div class="l-nav-cta-wrap">
+        <a href="#" class="btn btn-primary" onclick="openCheckout(event)">Comenzar ahora</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="l-hero l-hero-wrap">
+    <div class="particle-field parallax-el" id="particleField"></div>
+    <div class="hero-aura parallax-el" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div>
+      <span class="eyebrow"><span class="live-pulse"><span class="dotp"></span></span>&nbsp;Curso profesional online Â· Actualizado 2026</span>
+      <h1>Aprende a crear <span class="grad-text cycle-word-wrap"><span class="cycle-word" id="cycleWord">imÃ¡genes</span></span> con inteligencia artificial</h1>
+      <p class="lede">Imagen, video, audio y publicidad en un solo curso prÃ¡ctico. Domina las herramientas de IA generativa que ya usan las marcas y agencias, con proyectos guiados y prompts listos para copiar.</p>
+      <div class="l-hero-badge">âœ“ Todo lo que ves en esta pÃ¡gina estÃ¡ generado con las herramientas del curso</div>
+      <div class="l-hero-ctas">
+        <a href="#" class="btn btn-primary btn-lg" onclick="openCheckout(event)">Quiero empezar ahora</a>
+        <a href="#resultados" class="btn btn-lg">Ver resultados reales</a>
+      </div>
+      <div class="l-trust">
+        <div class="l-trust-item"><div class="num count-up" data-target="9">0</div><div class="lbl">MÃ³dulos</div></div>
+        <div class="l-trust-item"><div class="num count-up" data-target="5">0</div><div class="lbl">Proyectos guiados</div></div>
+        <div class="l-trust-item"><div class="num count-up" data-target="30" data-suffix="+">0</div><div class="lbl">Herramientas cubiertas</div></div>
+        <div class="l-trust-item"><div class="num">$0</div><div class="lbl">Costo inicial en herramientas</div></div>
+      </div>
+    </div>
+
+    <!-- BUY BOX -->
+    <div class="buy-box reveal tilt" id="buyBoxTilt">
+      <div class="buy-box-top"><span class="buy-box-badge">ðŸ”¥ Oferta de lanzamiento</span><span class="buy-box-off">90% OFF</span></div>
+      <!-- Reemplaza el precio y las cuotas segÃºn tu mÃ©todo de pago real (Mercado Pago, Tiendanube, etc.) -->
+      <div class="buy-box-price"><span class="old">$49.900</span><span class="new">$4.990</span></div>
+      <div class="buy-box-cuotas">ARS Â· Pago Ãºnico Â· hasta 3 cuotas sin interÃ©s de $1.663</div>
+      <ul class="buy-box-feats">
+        <li>9 mÃ³dulos interactivos: imagen, video, audio, publicidad, redes, flujos pro, Ã©tica y automatizaciÃ³n avanzada</li>
+        <li>5 proyectos guiados con prompts listos para copiar</li>
+        <li>MÃ¡s de 30 herramientas de IA comparadas y actualizadas a 2026</li>
+        <li>PDFs, checklists y plantillas descargables</li>
+        <li>Acceso inmediato y de por vida, desde cualquier dispositivo</li>
+      </ul>
+      <div class="buy-box-countdown">â³ Termina en <span id="priceCountdownHero">23:59:59</span></div>
+      <!-- Edita este nÃºmero con tu cupo real, o quita el bloque si no aplica -->
+      <div class="spots-left">âš¡ Quedan pocos cupos a este precio <div class="bar"><div class="bar-fill"></div></div></div>
+      <div style="height:12px"></div>
+      <a href="#" class="btn btn-primary btn-lg" onclick="openCheckout(event)">Comenzar el curso ahora</a>
+      <div class="buy-box-guarantee">GarantÃ­a de satisfacciÃ³n de 7 dÃ­as</div>
+    </div>
+  </header>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-img)"></span>Midjourney</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-vid)"></span>Runway Gen-4.5</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-aud)"></span>ElevenLabs</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-ads)"></span>HeyGen</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-img)"></span>Sora 2</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-vid)"></span>Kling AI</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-aud)"></span>Suno</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-ads)"></span>Canva Magic Studio</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-img)"></span>Adobe Firefly</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-vid)"></span>Veo 3.1</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-aud)"></span>n8n</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-ads)"></span>ComfyUI</span>
+      <!-- duplicado para loop infinito -->
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-img)"></span>Midjourney</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-vid)"></span>Runway Gen-4.5</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-aud)"></span>ElevenLabs</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-ads)"></span>HeyGen</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-img)"></span>Sora 2</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-vid)"></span>Kling AI</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-aud)"></span>Suno</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-ads)"></span>Canva Magic Studio</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-img)"></span>Adobe Firefly</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-vid)"></span>Veo 3.1</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-aud)"></span>n8n</span>
+      <span class="marquee-chip"><span class="dot2" style="background:var(--track-ads)"></span>ComfyUI</span>
+    </div>
+  </div>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- RESULTADOS REALES -->
+  <section class="l-section reveal" id="resultados" style="position:relative;overflow:hidden;">
+    <div class="blob-decor" style="top:-80px;right:-100px;" aria-hidden="true">
+      <svg viewBox="0 0 500 500"><path class="blob-shape" fill="var(--track-vid)" d="M300,120 C400,140 460,240 440,340 C420,440 300,480 200,450 C100,420 60,320 90,230 C120,140 200,100 300,120 Z"/></svg>
+    </div>
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Sin maquetas, sin stock</span>
+      <h2>Esto es lo que vas a poder producir</h2>
+      <p>Cada pieza de esta galerÃ­a nace de una sola imagen generada con prompt y se convierte en video con animaciÃ³n de cÃ¡mara, luces e iluminaciÃ³n â€” el mismo flujo que enseÃ±amos en el MÃ³dulo 03 y en el Proyecto 02.</p>
+    </div>
+
+    <!-- DEMO EN VIVO -->
+    <div class="ai-demo reveal" id="aiDemo" style="margin-bottom:24px;max-width:640px;margin-left:auto;margin-right:auto;">
+      <div class="ai-demo-bar"><span></span><span></span><span></span><span class="lbl">generador-ia Â· sesiÃ³n en vivo</span></div>
+      <div class="ai-demo-body">
+        <div class="ai-demo-prompt" id="aiDemoPrompt"><span class="cursor"></span></div>
+        <div class="ai-demo-progress" id="aiDemoProgress">
+          <span id="aiDemoStatus">Generando imagenâ€¦</span>
+          <div class="ai-demo-bar-track"><div class="ai-demo-bar-fill" id="aiDemoFill"></div></div>
+        </div>
+        <div class="ai-demo-result" id="aiDemoResult"><img id="aiDemoImg" src="assets/resultado-perfume.jpg" alt="Resultado generado con IA en vivo"></div>
+      </div>
+    </div>
+
+    <div class="track-viz reveal" id="heroViz" style="margin-bottom:24px;">
+      <div class="track-viz-head">
+        <span>PRODUCCIÃ“N â€” TIMELINE</span>
+        <span class="rec">EN VIVO</span>
+      </div>
+      <div class="track" data-t="img"><span class="track-label">IMG</span><div class="track-lane"><div class="clip" style="width:22%;animation-delay:.1s"></div><div class="clip" style="width:14%;animation-delay:.25s"></div><div class="clip" style="width:30%;animation-delay:.4s"></div></div></div>
+      <div class="track" data-t="vid"><span class="track-label">VID</span><div class="track-lane"><div class="clip" style="width:34%;animation-delay:.3s"></div><div class="clip" style="width:20%;animation-delay:.5s"></div></div></div>
+      <div class="track" data-t="aud"><span class="track-label">AUD</span><div class="track-lane"><div class="clip" style="width:60%;animation-delay:.5s"></div><div class="clip" style="width:18%;animation-delay:.7s"></div></div></div>
+      <div class="track" data-t="ads"><span class="track-label">ADS</span><div class="track-lane"><div class="clip" style="width:16%;animation-delay:.6s"></div><div class="clip" style="width:16%;animation-delay:.75s"></div><div class="clip" style="width:16%;animation-delay:.9s"></div></div></div>
+      <div class="track track-output"><span class="track-label">OUT</span><div class="track-lane"><div class="clip"></div></div></div>
+      <div class="track-viz-foot">Cuatro disciplinas, un solo flujo de producciÃ³n â€” asÃ­ trabaja un profesional en 2026.</div>
+    </div>
+    <div class="showcase-grid stagger-grid">
+      <div class="showcase-card tilt">
+        <div class="showcase-media"><span class="showcase-tag" style="color:var(--track-img)">MÃ³dulo 02 Â· Imagen</span><img src="assets/resultado-perfume.jpg" alt="FotografÃ­a de producto de un frasco de cosmÃ©tico de lujo generada con IA" loading="lazy"></div>
+        <div class="showcase-body"><h4>FotografÃ­a de producto de lujo</h4><p>Prompt de producto + iluminaciÃ³n de estudio Â· Leonardo.AI / Firefly</p></div>
+      </div>
+      <div class="showcase-card tilt">
+        <div class="showcase-media"><span class="showcase-tag" style="color:var(--track-vid)">MÃ³dulo 03 Â· Video</span><video src="assets/resultado-perfume.mp4" autoplay muted loop playsinline poster="assets/resultado-perfume.jpg"></video><span class="showcase-play">â–¶ Video con sonido</span></div>
+        <div class="showcase-body"><h4>La misma imagen, animada</h4><p>Imagen â†’ video con cÃ¡mara y humo animado Â· Kling AI / PixVerse</p></div>
+      </div>
+      <div class="showcase-card tilt">
+        <div class="showcase-media"><span class="showcase-tag" style="color:var(--track-img)">MÃ³dulo 02 Â· Imagen</span><img src="assets/resultado-animales.jpg" alt="Escena fotorrealista de animales salvajes en la selva generada con IA" loading="lazy"></div>
+        <div class="showcase-body"><h4>Escenas fotorrealistas complejas</h4><p>ComposiciÃ³n multi-sujeto y luz volumÃ©trica Â· Midjourney v7</p></div>
+      </div>
+      <div class="showcase-card tilt">
+        <div class="showcase-media"><span class="showcase-tag" style="color:var(--track-vid)">MÃ³dulo 03 Â· Video</span><video src="assets/resultado-animales.mp4" autoplay muted loop playsinline poster="assets/resultado-animales.jpg"></video><span class="showcase-play">â–¶ Video con sonido</span></div>
+        <div class="showcase-body"><h4>Storytelling con movimiento de cÃ¡mara</h4><p>AnimaciÃ³n de escena + rayos de luz y profundidad Â· Runway Gen-4.5</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- PROBLEMA -->
+  <section class="l-section reveal">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>El problema</span>
+      <h2>Hay 30 herramientas de IA nuevas. Nadie tiene tiempo de probarlas todas.</h2>
+      <p>Aprender IA generativa por tu cuenta significa tutoriales sueltos, informaciÃ³n desactualizada y resultados amateur. Este curso ordena todo ese caos en un camino claro, con las herramientas que realmente valen la pena en 2026.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card"><div class="glyph">âœ• SIN RUMBO</div><h4>Demasiadas herramientas</h4><p>Cada semana sale una IA nueva. Sin guÃ­a, pierdes horas probando y comparando en lugar de producir.</p></div>
+      <div class="problem-card"><div class="glyph">âœ• RESULTADO GENÃ‰RICO</div><h4>Prompts improvisados</h4><p>Sin una estructura de prompt profesional, el resultado se nota amateur â€” y no sirve para venderlo.</p></div>
+      <div class="problem-card"><div class="glyph">âœ• SIN PROCESO</div><h4>Herramientas aisladas</h4><p>Saber usar una app no alcanza. Un profesional combina imagen, video, audio y copy en un mismo pipeline.</p></div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- COMO FUNCIONA -->
+  <section class="l-section reveal">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>CÃ³mo funciona</span>
+      <h2>De cero a tu primera pieza profesional en 3 pasos</h2>
+      <p>Sin instalar software, sin tarjeta de crÃ©dito para empezar. Accedes hoy y produces tu primer resultado en la misma sesiÃ³n.</p>
+    </div>
+    <div class="how-grid stagger-grid">
+      <div class="how-card">
+        <div class="how-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="21" stroke="var(--border)" stroke-width="2"/><path class="draw" d="M15 30l6-14 6 14M17.5 24h7" stroke="var(--track-img)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="16" r="2.4" fill="var(--track-img)"/></svg></div>
+        <h4>Aprendes la fÃ³rmula de prompt</h4><p>Cada mÃ³dulo te da la estructura exacta de prompt para tu objetivo â€” producto, personaje, escena o campaÃ±a.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="21" stroke="var(--border)" stroke-width="2"/><path class="draw" d="M18 30l7-13 5 9-4 7-8-3z" stroke="var(--track-vid)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="18" r="2" fill="var(--track-vid)"/></svg></div>
+        <h4>Produces con herramientas gratuitas</h4><p>Aplicas lo aprendido en las mismas herramientas que usan agencias y marcas, con planes freemium suficientes.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="21" stroke="var(--border)" stroke-width="2"/><path class="draw" d="M24 14l9 5v10l-9 5-9-5V19z" stroke="var(--track-ads)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path class="draw" d="M24 24v10M24 24l9-5M24 24l-9-5" stroke="var(--track-ads)" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h4>Empaquetas tu campaÃ±a completa</h4><p>Unes imagen, video, audio y copy en un pipeline real, listo para publicar o entregar a un cliente.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- TEMARIO -->
+  <section class="l-section reveal" id="temario">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Temario completo</span>
+      <h2>9 mÃ³dulos, de cero a un flujo de producciÃ³n profesional</h2>
+      <p>Un curso diseÃ±ado para aprender rÃ¡pido y crear proyectos reales desde el primer mÃ³dulo: cada clase es prÃ¡ctica, directa al grano y pensada para que generes tu primera pieza el mismo dÃ­a que la ves.</p>
+    </div>
+    <div class="curr-list" id="currList">
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:var(--text-quaternary)"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 01</div><h4>IntroducciÃ³n a la IA generativa</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:var(--track-img)"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 02 Â· Imagen</div><h4>GeneraciÃ³n de imÃ¡genes con IA</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:var(--track-vid)"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 03 Â· Video</div><h4>GeneraciÃ³n de video con IA</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:var(--track-ads)"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 04 Â· Publicidad</div><h4>Publicidad y marketing con IA</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:var(--track-aud)"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 05 Â· Audio</div><h4>Audio, voz y podcasts con IA</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:var(--accent)"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 06</div><h4>Flujos de trabajo profesionales</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:var(--text-secondary)"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 07</div><h4>Ã‰tica, derechos y buenas prÃ¡cticas</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:linear-gradient(135deg,var(--track-img),var(--track-ads))"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 08 Â· Nivel avanzado</div><h4>AutomatizaciÃ³n y flujos con IA agentic</h4></div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-head">
+          <div class="curr-flag" style="background:linear-gradient(135deg,var(--track-ads),var(--track-vid))"></div>
+          <div class="curr-head-txt"><div class="m">MÃ³dulo 09</div><h4>IA para Redes Sociales y Calendario de Contenido</h4></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- GRATIS O PAGAS -->
+  <section class="l-section reveal">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Tu presupuesto, tu decisiÃ³n</span>
+      <h2>Â¿Gratis o de pago? Las dos.</h2>
+    </div>
+    <div class="fvp-block">
+      <div class="fvp-text">
+        En este curso primero aprendes a producir <strong>todo con herramientas 100% gratuitas</strong>: imÃ¡genes, video y audio, sin gastar un peso.<br><br>
+        Pero tambiÃ©n te mostramos <strong>quÃ© apps de pago valen realmente la pena</strong> â€” las que te dan un salto de calidad profesional cuando decidas escalar.<br><br>
+        El camino es claro: <strong>empezÃ¡s gratis, aprendÃ©s bien</strong>, y si querÃ©s ir mÃ¡s rÃ¡pido, ya sabÃ©s exactamente en quÃ© conviene invertir.
+      </div>
+      <div class="fvp-badges">
+        <div class="fvp-badge"><span class="n" style="color:var(--positive)">100%</span> gratis para completar los 5 proyectos guiados</div>
+        <div class="fvp-badge"><span class="n" style="color:var(--accent)">30+</span> herramientas comparadas, gratis y de pago</div>
+        <div class="fvp-badge"><span class="n" style="color:var(--track-vid)">$0</span> de inversiÃ³n necesaria para empezar hoy</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- HERRAMIENTAS -->
+  <section class="l-section reveal" id="herramientas">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Stack de herramientas</span>
+      <h2>MÃ¡s de 30 herramientas, comparadas y con planes gratuitos</h2>
+      <p>No necesitas presupuesto para empezar. La mayorÃ­a del curso se completa con planes gratuitos o freemium.</p>
+    </div>
+    <div class="tool-chip-grid">
+      <span class="tool-chip"><span class="sw" style="background:var(--track-img)"></span>Midjourney v7</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-img)"></span>DALLÂ·E 3</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-img)"></span>Stable Diffusion XL</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-img)"></span>Adobe Firefly</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-img)"></span>Leonardo.AI</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-img)"></span>Microsoft Designer</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-vid)"></span>Sora 2</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-vid)"></span>Google Veo 3.1</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-vid)"></span>Runway Gen-4.5</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-vid)"></span>Kling AI 3.0</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-vid)"></span>PixVerse V6</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-vid)"></span>CapCut</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-aud)"></span>ElevenLabs</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-aud)"></span>Suno AI</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-aud)"></span>Udio</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-aud)"></span>Adobe Podcast</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-ads)"></span>Canva Magic Studio</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-ads)"></span>HeyGen</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-ads)"></span>Synthesia</span>
+      <span class="tool-chip"><span class="sw" style="background:var(--track-ads)"></span>Meta AI Studio</span>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- PROYECTOS -->
+  <section class="l-section reveal" id="proyectos">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Laboratorio prÃ¡ctico</span>
+      <h2>5 proyectos guiados con prompts listos para copiar</h2>
+      <p>No solo teorÃ­a: al final de cada mÃ³dulo clave construyes una pieza real, paso a paso, con checklist de avance.</p>
+    </div>
+    <div class="lab-grid">
+      <div class="lab-card"><div class="n">Proyecto 01</div><h4>Tu primera imagen con IA</h4><p>Foto de producto profesional en 4 pasos, con prompt estructurado listo para copiar.</p></div>
+      <div class="lab-card"><div class="n">Proyecto 02</div><h4>Tu primer video con IA</h4><p>Convierte tu imagen en un clip animado de 5 segundos con Kling o PixVerse.</p></div>
+      <div class="lab-card"><div class="n">Proyecto 03</div><h4>Tu primer audio con IA</h4><p>LocuciÃ³n profesional con ElevenLabs y mÃºsica de fondo generada con Suno.</p></div>
+      <div class="lab-card"><div class="n">Proyecto 04</div><h4>Tu primera publicidad con IA</h4><p>CampaÃ±a completa: copy, imagen, video y formatos para Instagram Feed y Story.</p></div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- TESTIMONIOS -->
+  <section class="l-section reveal">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Resultados</span>
+      <h2>Lo que dicen quienes ya aplicaron el curso</h2>
+      <!-- Edita estos testimonios con reseÃ±as reales de tus alumnos antes de publicar la pÃ¡gina -->
+    </div>
+    <!-- Edita esta calificaciÃ³n con tu rating real antes de publicar -->
+    <div class="rating-badge"><span class="stars">â˜…â˜…â˜…â˜…â˜…</span> <strong>4.9/5</strong> Â· basado en reseÃ±as verificadas de alumnos</div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">MontÃ© mi primera campaÃ±a completa para un cliente en un fin de semana. El mÃ³dulo de publicidad por sÃ­ solo justifica el curso.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--track-img)">CR</div><div><div class="name">Camila R.</div><div class="role">Community Manager</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">Nunca habÃ­a editado video y ahora produzco los anuncios de mi propio negocio. Los prompts listos para copiar ahorran muchÃ­simo tiempo.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--track-vid)">DM</div><div><div class="name">Diego M.</div><div class="role">Emprendedor</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">La comparativa de herramientas me ahorrÃ³ semanas de prueba y error. Ya sÃ© exactamente cuÃ¡l usar segÃºn el proyecto.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--track-aud)">VS</div><div><div class="name">Valentina S.</div><div class="role">DiseÃ±adora freelance</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">Con el mÃ³dulo de video convertÃ­ las fotos de producto de mi tienda en clips animados en minutos. Mis anuncios ahora se ven de otra categorÃ­a.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--accent)">JP</div><div><div class="name">JuliÃ¡n P.</div><div class="role">DueÃ±o de ecommerce</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">El mÃ³dulo de audio me sacÃ³ el miedo a grabarme. Clono mi propia voz para los videos y nadie nota la diferencia.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--track-vid)">RG</div><div><div class="name">RocÃ­o G.</div><div class="role">Creadora de contenido</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">ArmÃ© todo el calendario de contenido del mes en una sola tarde con el mÃ³dulo 9. DejÃ© de improvisar quÃ© publicar cada dÃ­a.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--track-ads)">TA</div><div><div class="name">TomÃ¡s A.</div><div class="role">Social media freelance</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">Soy la persona menos tÃ©cnica de mi equipo y aun asÃ­ pude automatizar la generaciÃ³n de piezas con n8n siguiendo el mÃ³dulo 8.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--track-img)">SN</div><div><div class="name">SofÃ­a N.</div><div class="role">Coordinadora de marketing</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">El mÃ³dulo de Ã©tica me hizo repensar cÃ³mo comunico que uso IA con mis clientes. Ahora es un plus de confianza, no algo que esconder.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--track-aud)">EM</div><div><div class="name">Ezequiel M.</div><div class="role">FotÃ³grafo profesional</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">â˜…â˜…â˜…â˜…â˜…</div>
+        <p class="quote">Hice el proyecto de imagen un domingo a la tarde y el lunes ya tenÃ­a las fotos de producto nuevas subidas a la tienda online.</p>
+        <div class="testi-who"><div class="testi-avatar" style="background:var(--accent)">ML</div><div><div class="name">Milagros L.</div><div class="role">Emprendedora textil</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- PARA QUIÃ‰N ES -->
+  <section class="l-section reveal">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Antes de anotarte</span>
+      <h2>Â¿Es este curso para vos?</h2>
+      <p>Preferimos que lo sepas antes de comprar, no despuÃ©s.</p>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-card yes">
+        <h4>âœ“ Este curso es para vos siâ€¦</h4>
+        <ul>
+          <li>QuerÃ©s producir contenido profesional sin depender de un equipo grande ni presupuestos de agencia</li>
+          <li>TenÃ©s un negocio, marca personal o clientes y necesitÃ¡s publicar de forma constante</li>
+          <li>Ya probaste alguna IA generativa pero sentÃ­s que "algo te falta" para verte profesional</li>
+          <li>PreferÃ­s aprender haciendo, con proyectos guiados, en vez de solo mirar teorÃ­a</li>
+          <li>EstÃ¡s dispuesto a dedicarle un par de horas por semana, a tu ritmo</li>
+        </ul>
+      </div>
+      <div class="fit-card no">
+        <h4 style="color:var(--text-tertiary)">âœ• Este curso no es para vos siâ€¦</h4>
+        <ul>
+          <li>BuscÃ¡s un botÃ³n mÃ¡gico que genere todo sin que vos entiendas el proceso</li>
+          <li>Ya trabajas hace aÃ±os como diseÃ±ador o editor senior con flujo de IA propio y afianzado</li>
+          <li>No estÃ¡s dispuesto a practicar ni a completar los proyectos guiados</li>
+          <li>EsperÃ¡s resultados sin dedicarle nada de tiempo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- EL CURSO SE PAGA SOLO -->
+  <section class="l-section reveal" style="position:relative;overflow:hidden;">
+    <div class="blob-decor" style="bottom:-100px;left:-120px;" aria-hidden="true">
+      <svg viewBox="0 0 500 500"><path class="blob-shape" fill="var(--accent)" d="M300,120 C400,140 460,240 440,340 C420,440 300,480 200,450 C100,420 60,320 90,230 C120,140 200,100 300,120 Z" style="animation-delay:-3s"/></svg>
+    </div>
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Retorno de tu inversiÃ³n</span>
+      <h2>Un curso que se paga solo</h2>
+      <p>Con lo que cuesta un solo dÃ­a de producciÃ³n tradicional o un mes de suscripciones, accedÃ©s a un curso que te enseÃ±a a lograr lo mismo por tu cuenta â€” y te queda para siempre.</p>
+    </div>
+    <div class="roi-wrap">
+      <table class="roi-table">
+        <tr><th>Concepto</th><th>Con el curso</th><th>Sin el curso</th></tr>
+        <tr><td>Suscripciones a herramientas de IA</td><td class="yes">âœ“ $0/mes</td><td class="no">+$150.000/mes</td></tr>
+        <tr><td>Video con un creador de contenido (UGC)</td><td class="yes">âœ“ $0 c/u</td><td class="no">$100.000 c/u</td></tr>
+        <tr><td>LocuciÃ³n profesional para tus videos</td><td class="yes">âœ“ $0 c/u</td><td class="no">$20.000 c/u</td></tr>
+        <tr><td>SesiÃ³n de fotos de producto en estudio</td><td class="yes">âœ“ $0 c/u</td><td class="no">$400.000 c/u</td></tr>
+        <tr><td>Horas probando herramientas al azar</td><td class="yes">âœ“ Unas horas guiadas</td><td class="no">Semanas de prueba y error</td></tr>
+        <tr><td><strong>Total</strong></td><td class="yes">$4.990 pago Ãºnico</td><td>+$670.000/mes</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+
+  <div class="wave-divider reveal" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path class="wave-path" d="M0,30 C150,60 300,0 450,30 C600,60 750,0 900,30 C1050,60 1150,10 1200,30" fill="none" stroke="var(--accent)" stroke-width="1.5"/></svg>
+  </div>
+
+  <!-- PRECIO -->
+  <section class="l-section reveal" id="precio">
+    <div class="l-section-head" style="margin:0 auto 40px; text-align:center; max-width:560px;">
+      <span class="eyebrow" style="justify-content:center; width:100%;"><span class="dot"></span>Acceso al curso</span>
+      <h2>Una sola inversiÃ³n, acceso completo</h2>
+      <p>Sin mensualidades ni letra pequeÃ±a. Pagas una vez y entras de inmediato a la plataforma del curso.</p>
+    </div>
+    <div class="price-wrap">
+      <div class="price-card">
+        <div class="price-ribbon">Oferta de lanzamiento Â· <span id="priceCountdown">23:59:59</span></div>
+        <h3>Acceso completo al curso</h3>
+        <!-- Reemplaza el precio, la moneda y las cuotas segÃºn tu mÃ©todo de pago real -->
+        <div class="price-amount"><span class="old">$49.900</span><span class="new">$4.990</span></div>
+        <div class="price-note">Pago Ãºnico Â· ARS Â· hasta 3 cuotas sin interÃ©s de $1.663 Â· Acceso de por vida</div>
+
+        <ul class="value-stack">
+          <li><span>9 mÃ³dulos completos (imagen, video, audio, publicidad, redes, flujos pro, Ã©tica y automatizaciÃ³n)</span><span class="v">$49.900</span></li>
+          <li><span>5 proyectos guiados con prompts listos para copiar</span><span class="v">$29.000</span></li>
+          <li><span>Comparativas de herramientas actualizadas 2026</span><span class="v">$19.000</span></li>
+          <li class="total-row"><span>Valor total</span><span class="v">$97.900</span></li>
+        </ul>
+
+        <ul class="price-feats">
+          <li>Acceso desde cualquier dispositivo, sin instalar nada</li>
+          <li>Checklists de avance en cada mÃ³dulo y proyecto</li>
+          <li>Actualizaciones futuras del curso incluidas</li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-lg" onclick="openCheckout(event)">Obtener acceso ahora por $4.990</a>
+        <div class="price-guarantee">GarantÃ­a de satisfacciÃ³n de 7 dÃ­as â€” si no te sirve, te devolvemos tu dinero</div>
+
+        <div class="trust-strip">
+          <div class="trust-strip-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Pago 100% seguro</div>
+          <div class="trust-strip-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Acceso instantÃ¡neo</div>
+          <div class="trust-strip-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>GarantÃ­a 7 dÃ­as</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- GARANTIA -->
+  <section class="l-section reveal">
+    <div class="guarantee-wrap">
+      <div class="guarantee-badge">100%<br>GARANTIZADO<br>7 DÃAS</div>
+      <div class="guarantee-steps">
+        <h3 style="font-size:19px;margin-bottom:4px;">Cero riesgo para vos</h3>
+        <div class="g-step"><b>1.</b> EntrÃ¡s hoy y explorÃ¡s el curso completo, a tu ritmo, durante 7 dÃ­as.</div>
+        <div class="g-step"><b>2.</b> Si sentÃ­s que no es lo que buscabas, nos escribÃ­s por email o WhatsApp â€” sin cuestionarios ni vueltas.</div>
+        <div class="g-step"><b>3.</b> Te devolvemos el 100% de tu dinero. AsÃ­ de simple.</div>
+        <div class="g-step" style="color:var(--text-tertiary);margin-top:4px;">La Ãºnica forma de perder acÃ¡ es no intentarlo.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- PRÃ“XIMOS CURSOS -->
+  <section class="l-section reveal" id="proximos-cursos">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Lo que viene</span>
+      <h2>PrÃ³ximos cursos de AcademIA</h2>
+      <p>Seguimos ampliando el catÃ¡logo con el mismo enfoque: rÃ¡pido de aprender, directo a crear proyectos reales. Los alumnos actuales reciben acceso anticipado y precio preferencial.</p>
+    </div>
+    <div class="upcoming-grid stagger-grid">
+      <div class="upcoming-card">
+        <span class="upcoming-tag" style="color:var(--track-img);background:var(--track-img-soft);">PrÃ³ximamente</span>
+        <h4>IA para Ecommerce</h4>
+        <p>Fichas de producto, fotos de catÃ¡logo y anuncios generados con IA, de punta a punta, para tienda online.</p>
+      </div>
+      <div class="upcoming-card">
+        <span class="upcoming-tag" style="color:var(--track-vid);background:var(--track-vid-soft);">PrÃ³ximamente</span>
+        <h4>CreaciÃ³n de Avatares y Presentadores IA</h4>
+        <p>DiseÃ±a, entrena y anima tu propio avatar digital para videos, cursos y contenido de marca.</p>
+      </div>
+      <div class="upcoming-card">
+        <span class="upcoming-tag" style="color:var(--track-aud, var(--accent));background:var(--track-aud-soft);">PrÃ³ximamente</span>
+        <h4>Agentes de IA para Negocios</h4>
+        <p>Automatiza atenciÃ³n al cliente, ventas y reportes con agentes conectados a tus herramientas de siempre.</p>
+      </div>
+    </div>
+    <div class="upcoming-note">âœ‰ï¸ Al inscribirte hoy quedas anotado para recibir aviso y beneficio de lanzamiento en cada nuevo curso.</div>
+  </section>
+
+  <div class="l-divider"><div class="line"></div></div>
+
+  <!-- FAQ -->
+  <section class="l-section reveal" id="faq">
+    <div class="l-section-head">
+      <span class="eyebrow"><span class="dot"></span>Preguntas frecuentes</span>
+      <h2>Todo lo que necesitas saber antes de empezar</h2>
+    </div>
+    <div id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Â¿Necesito experiencia previa en diseÃ±o o ediciÃ³n?</span><span class="chev">+</span></button>
+        <div class="faq-a"><p>No. El curso estÃ¡ pensado para empezar desde cero. Cada mÃ³dulo explica los conceptos antes de pasar a la prÃ¡ctica, con prompts ya escritos para que solo tengas que copiarlos y ajustarlos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Â¿Tengo que pagar por las herramientas de IA?</span><span class="chev">+</span></button>
+        <div class="faq-a"><p>No es necesario. Casi todas las herramientas del curso tienen un plan gratuito o freemium suficiente para completar los 5 proyectos. Te indicamos alternativas gratuitas en cada paso.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Â¿CuÃ¡nto tiempo tengo de acceso?</span><span class="chev">+</span></button>
+        <div class="faq-a"><p>El acceso es de por vida, incluyendo las actualizaciones que hagamos al contenido cuando aparezcan nuevas herramientas relevantes.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Â¿Siguen vigentes las herramientas en 2026?</span><span class="chev">+</span></button>
+        <div class="faq-a"><p>El temario se revisa periÃ³dicamente para reflejar las herramientas y versiones mÃ¡s usadas del momento, y se prioriza lo que realmente se usa en la industria hoy.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Â¿QuÃ© pasa si el curso no es para mÃ­?</span><span class="chev">+</span></button>
+        <div class="faq-a"><p>Cuentas con una garantÃ­a de 7 dÃ­as desde tu compra. Si no te sirve, solicitas el reembolso sin vueltas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="l-section reveal">
+    <div class="final-cta">
+      <span class="live-pulse" style="justify-content:center;margin-bottom:14px;"><span class="dotp"></span>&nbsp;<span style="font-size:12px;color:var(--positive);font-weight:600;">Oferta activa ahora mismo</span></span>
+      <h2>De acÃ¡ a 30 dÃ­as vas a estar produciendo <span class="grad-text">como un profesional</span></h2>
+      <p>Cada dÃ­a que pasa sin empezar es contenido, campaÃ±as o clientes que le estÃ¡s dejando a alguien que sÃ­ se animÃ³. Hoy entrÃ¡s por $4.990 â€” maÃ±ana puede costar $49.900.</p>
+      <a href="#" class="btn btn-primary btn-lg" onclick="openCheckout(event)">Quiero empezar ahora por $4.990</a>
+      <div class="spots-left" style="margin-top:18px;">âš¡ Termina en <span id="finalCountdown" style="font-family:var(--font-mono);color:var(--warning);">23:59:59</span></div>
+    </div>
+  </div>
+
+  <footer class="l-footer">
+    <div class="l-footer-inner">
+      <div>Â© 2026 AcademIA. Todos los derechos reservados.</div>
+      <div>Imagen Â· Video Â· Audio Â· Publicidad</div>
+    </div>
+  </footer>
+</div>
+
+<!-- Barra fija para mÃ³vil: aparece al hacer scroll pasado el hero -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="p"><strong>$4.990 Â· pago Ãºnico</strong>Oferta de lanzamiento</div>
+  <a href="#" class="btn btn-primary" onclick="openCheckout(event)">Comenzar ahora</a>
+</div>
+
+<!-- ============ MODAL: FORMULARIO DE SUSCRIPCIÃ“N Y PAGO (GalioPay) ============ -->
+<!-- El pago se procesa con GalioPay (https://pay.galio.app). Este formulario NO llama a la
+     API de GalioPay directamente: llama a tu propio backend (endpoint /api/crear-pago-galiopay),
+     que es quien tiene la API Key secreta y crea el "payment link" del lado del servidor.
+     El navegador solo recibe la URL de pago y redirige ahÃ­. Ver backend-galiopay-ejemplo.js
+     para el servidor de referencia (Node/Express) que hace esa parte. -->
+<div id="checkoutOverlay" onclick="if(event.target===this) closeCheckout()">
+  <div class="checkout-modal">
+    <div class="checkout-head">
+      <div class="brand"><span class="mark" style="width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--track-img),var(--track-vid) 34%,var(--track-aud) 68%,var(--track-ads));display:inline-block;"></span>AcademIA</div>
+      <button class="checkout-close" onclick="closeCheckout()">âœ•</button>
+    </div>
+    <div class="checkout-body">
+
+      <div class="checkout-form hide-on-success" id="checkoutForm">
+        <div class="checkout-summary">
+          <div class="cs-name">Acceso completo a AcademIA<br><span style="font-size:11px;color:var(--text-quaternary)">9 mÃ³dulos + 5 proyectos guiados</span></div>
+          <div><span class="cs-old">$49.900</span><span class="cs-price">$4.990</span></div>
+        </div>
+
+        <div class="checkout-tabs" role="tablist" aria-label="Acceso">
+          <button type="button" class="checkout-tab active" id="checkoutRegisterTab" onclick="setCheckoutMode('register')">Registrarme y abonar</button>
+          <button type="button" class="checkout-tab" id="checkoutLoginTab" onclick="setCheckoutMode('login')">Iniciar sesiÃ³n</button>
+        </div>
+
+        <form id="coForm" onsubmit="submitCheckout(event)">
+          <div class="co-field co-register-only">
+            <label for="coName">Nombre completo</label>
+            <input type="text" id="coName" placeholder="Como figurarÃ¡ en tu certificado" required>
+          </div>
+          <div class="co-field">
+            <label for="coEmail">Email</label>
+            <input type="email" id="coEmail" placeholder="tu@email.com" required>
+          </div>
+          <div class="co-field">
+            <label for="coPassword">ContraseÃ±a para entrar al curso</label>
+            <input type="password" id="coPassword" placeholder="MÃ­nimo 6 caracteres" minlength="6" autocomplete="new-password" required>
+          </div>
+          <div class="co-field co-register-only">
+            <label for="coPhone">WhatsApp</label>
+            <input type="tel" id="coPhone" placeholder="+54 9 ..." required>
+          </div>
+
+          <div class="co-note" style="background:var(--surface-raised);border:1px solid var(--border);border-radius:8px;padding:11px 12px;margin-bottom:16px;color:var(--text-secondary);">
+            <img src="assets/galiopay-badge.svg" alt="GalioPay" style="height:16px;vertical-align:-3px;margin-right:6px;" onerror="this.style.display='none'">ðŸ”’ Vas a completar el pago en el entorno seguro de <strong style="color:var(--text-primary)">GalioPay</strong>. Te redirigimos automÃ¡ticamente al confirmar.
+          </div>
+
+          <div id="coError" style="display:none;background:rgba(255,107,74,0.1);border:1px solid rgba(255,107,74,0.3);border-radius:8px;padding:11px 12px;margin-bottom:16px;font-size:12px;color:var(--text-secondary);"></div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;" id="coSubmitBtn">Continuar a GalioPay â€” $4.990</button>
+        </form>
+
+        <div class="checkout-guarantee">ðŸ”’ Pago seguro con GalioPay Â· GarantÃ­a de 7 dÃ­as Â· Acceso inmediato</div>
+      </div>
+
+      <div class="checkout-success" id="checkoutSuccess">
+        <div class="cs-icon">âœ“</div>
+        <h3>Â¡Listo, <span id="successName">tu inscripciÃ³n estÃ¡ confirmada</span>!</h3>
+        <p>Te enviamos el acceso a tu email. Ya podÃ©s entrar a la plataforma y arrancar por el primer mÃ³dulo cuando quieras.</p>
+        <button class="btn btn-primary btn-lg" style="width:100%;" onclick="goToCourseFromCheckout()">Entrar a AcademIA ahora</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<script>
+  const pages = ['intro','imagenes','video','publicidad','audio','flujos','etica','avanzado','social','lab-img','lab-vid','lab-aud','lab-ad','lab-auto','recursos','certificado'];
+  const titles = {
+    'intro':'IntroducciÃ³n',
+    'imagenes':'ImÃ¡genes con IA',
+    'video':'Video con IA',
+    'publicidad':'Publicidad',
+    'audio':'Audio & Voz',
+    'flujos':'Flujos Pro',
+    'etica':'Ã‰tica & Derechos',
+    'avanzado':'AutomatizaciÃ³n IA',
+    'social':'Redes & Calendario',
+    'lab-img':'Proyecto: Imagen',
+    'lab-vid':'Proyecto: Video',
+    'lab-aud':'Proyecto: Audio',
+    'lab-ad':'Proyecto: Publicidad',
+    'lab-auto':'Proyecto: AutomatizaciÃ³n',
+    'recursos':'Recursos & Glosario',
+    'certificado':'Mi Certificado'
+  };
+  let currentPage = 'intro';
+
+  function goPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const nav = document.querySelector('.nav-item[data-page="' + page + '"]');
+    if(nav) nav.classList.add('active');
+    document.getElementById('topbarTitle').textContent = titles[page];
+    currentPage = page;
+    const idx = pages.indexOf(page) + 1;
+    const pct = Math.round((idx / pages.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = idx + ' de ' + pages.length;
+    document.querySelector('.main').scrollTo({top:0,behavior:'smooth'});
+    const sb = document.getElementById('sidebar');
+    const ov = document.querySelector('.overlay');
+    if(sb.classList.contains('open')) { sb.classList.remove('open'); ov.classList.remove('show'); }
+  }
+
+  function toggleSidebar() {
+    const sb = document.getElementById('sidebar');
+    const ov = document.querySelector('.overlay');
+    sb.classList.toggle('open');
+    ov.classList.toggle('show');
+  }
+
+  function toggleCheck(li) {
+    li.classList.toggle('checked');
+  }
+
+  function copyPrompt(id, btn) {
+    const text = document.getElementById(id).innerText;
+    if(navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copiado';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 1500);
+      });
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = 'Copiado';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 1500);
+    }
+  }
+
+  function scrollToChecklist() {
+    const cl = document.querySelector('.page.active .checklist');
+    if(cl) cl.scrollIntoView({behavior:'smooth',block:'center'});
+    else alert('No hay checklist en esta pÃ¡gina.');
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  }
+
+  // Countdown de la oferta â€” ilustrativo, reinicia cada sesiÃ³n. Cambia END_MS por una fecha fija real si la usas en producciÃ³n.
+  (function() {
+    const DURATION = 24 * 60 * 60 * 1000;
+    const end = Date.now() + DURATION;
+    const els = [document.getElementById('countdown'), document.getElementById('priceCountdownHero'), document.getElementById('priceCountdown'), document.getElementById('bonusCountdown'), document.getElementById('finalCountdown')].filter(Boolean);
+    function tick() {
+      let rem = Math.max(0, end - Date.now());
+      const h = String(Math.floor(rem / 3600000)).padStart(2,'0');
+      const m = String(Math.floor((rem % 3600000) / 60000)).padStart(2,'0');
+      const s = String(Math.floor((rem % 60000) / 1000)).padStart(2,'0');
+      els.forEach(el => el.textContent = `${h}:${m}:${s}`);
+      if(rem > 0) requestAnimationFrame(() => setTimeout(tick, 250));
+    }
+    if(els.length) tick();
+  })();
+
+  // Barra fija mÃ³vil: se muestra al pasar el hero
+  (function() {
+    const bar = document.getElementById('stickyCta');
+    const hero = document.querySelector('.l-hero');
+    if(!bar || !hero || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => bar.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0));
+    }, {threshold:0});
+    io.observe(hero);
+  })();
+
+  // PartÃ­culas flotantes en el hero
+  (function() {
+    const field = document.getElementById('particleField');
+    if(!field) return;
+    const COLORS = ['#e3a63d','#8d7cf0','#ff6b4a','#34d399'];
+    for(let i=0; i<22; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const left = Math.random()*100;
+      const dur = 6 + Math.random()*7;
+      const delay = Math.random()*8;
+      const drift = (Math.random()*60-30).toFixed(0)+'px';
+      const size = (2 + Math.random()*3).toFixed(1);
+      p.style.left = left+'%';
+      p.style.width = size+'px';
+      p.style.height = size+'px';
+      p.style.background = COLORS[i % COLORS.length];
+      p.style.boxShadow = '0 0 8px 2px ' + COLORS[i % COLORS.length] + '80';
+      p.style.setProperty('--drift', drift);
+      p.style.animationDuration = dur+'s';
+      p.style.animationDelay = delay+'s';
+      field.appendChild(p);
+    }
+  })();
+
+  // Palabra cÃ­clica animada en el tÃ­tulo del hero
+  (function() {
+    const el = document.getElementById('cycleWord');
+    if(!el) return;
+    const words = ['imÃ¡genes', 'videos', 'voces', 'anuncios', 'campaÃ±as'];
+    let i = 0;
+    setInterval(() => {
+      i = (i+1) % words.length;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        el.textContent = words[i];
+        el.style.transition = 'opacity .35s ease, transform .35s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 220);
+    }, 2200);
+  })();
+
+  // Contadores animados (cuentan desde 0 al entrar en pantalla)
+  (function() {
+    const counters = document.querySelectorAll('.count-up');
+    if(!counters.length || !('IntersectionObserver' in window)) return;
+    const animate = (el) => {
+      const target = parseInt(el.dataset.target, 10) || 0;
+      const suffix = el.dataset.suffix || '';
+      const dur = 1100;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); } });
+    }, {threshold:0.6});
+    counters.forEach(c => io.observe(c));
+  })();
+
+  // Demo de generaciÃ³n en vivo â€” simula el flujo real del curso
+  (function() {
+    const promptEl = document.getElementById('aiDemoPrompt');
+    const progressEl = document.getElementById('aiDemoProgress');
+    const statusEl = document.getElementById('aiDemoStatus');
+    const fillEl = document.getElementById('aiDemoFill');
+    const resultEl = document.getElementById('aiDemoResult');
+    const imgEl = document.getElementById('aiDemoImg');
+    const demo = document.getElementById('aiDemo');
+    if(!promptEl || !demo) return;
+
+    const scenes = [
+      { prompt: 'FotografÃ­a de producto de un frasco de cosmÃ©tico de lujo, luz de estudio dorada, humo suave, fondo oscuro, 8k', img: 'assets/resultado-perfume.jpg', status: 'Generando imagen con IAâ€¦' },
+      { prompt: 'Escena fotorrealista en la selva, leÃ³n, tigre, elefante y lobo caminando juntos, rayos de luz, 8k', img: 'assets/resultado-animales.jpg', status: 'Generando imagen con IAâ€¦' }
+    ];
+    let s = 0;
+    let started = false;
+
+    function typeText(text, cb) {
+      promptEl.innerHTML = '';
+      let i = 0;
+      const cursor = '<span class="cursor"></span>';
+      const t = setInterval(() => {
+        i++;
+        promptEl.innerHTML = text.slice(0, i) + cursor;
+        if(i >= text.length) { clearInterval(t); cb && cb(); }
+      }, 22);
+    }
+
+    function runScene() {
+      const scene = scenes[s % scenes.length];
+      resultEl.classList.remove('show');
+      progressEl.classList.remove('show');
+      fillEl.style.width = '0%';
+      typeText(scene.prompt, () => {
+        setTimeout(() => {
+          progressEl.classList.add('show');
+          statusEl.textContent = scene.status;
+          requestAnimationFrame(() => { fillEl.style.width = '100%'; });
+          setTimeout(() => {
+            imgEl.src = scene.img;
+            resultEl.classList.add('show');
+            statusEl.textContent = 'Â¡Listo! Imagen generada.';
+          }, 1700);
+        }, 350);
+      });
+      s++;
+      setTimeout(runScene, 7200);
+    }
+
+    if('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting && !started){ started = true; runScene(); io.unobserve(e.target); } });
+      }, {threshold:0.4});
+      io.observe(demo);
+    } else {
+      runScene();
+    }
+  })();
+
+  // Brillo que sigue el cursor
+  (function() {
+    const glow = document.getElementById('cursorGlow');
+    if(!glow) return;
+    let raf = null;
+    document.addEventListener('mousemove', (e) => {
+      glow.classList.add('active');
+      if(raf) return;
+      raf = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+        document.documentElement.style.setProperty('--my', e.clientY + 'px');
+        raf = null;
+      });
+    });
+    document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+  })();
+
+  // Efecto 3D tilt en tarjetas al mover el mouse
+  (function() {
+    const cards = document.querySelectorAll('.tilt');
+    if(!cards.length || window.matchMedia('(pointer:coarse)').matches) return;
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(700px) rotateY(${px*6}deg) rotateX(${-py*6}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  })();
+
+  // PequeÃ±a explosiÃ³n de partÃ­culas al hacer clic en los botones principales
+  (function() {
+    const COLORS = ['#e3a63d','#8d7cf0','#ff6b4a','#34d399'];
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-primary');
+      if(!btn) return;
+      const r = btn.getBoundingClientRect();
+      const cx = r.left + r.width/2, cy = r.top + r.height/2;
+      for(let i=0; i<14; i++) {
+        const p = document.createElement('div');
+        p.className = 'burst-particle';
+        const angle = (Math.PI*2*i)/14 + Math.random()*0.4;
+        const dist = 40 + Math.random()*50;
+        p.style.setProperty('--bx', Math.cos(angle)*dist + 'px');
+        p.style.setProperty('--by', Math.sin(angle)*dist + 'px');
+        p.style.left = cx + 'px';
+        p.style.top = cy + 'px';
+        const size = 4 + Math.random()*4;
+        p.style.width = size+'px';
+        p.style.height = size+'px';
+        p.style.background = COLORS[i % COLORS.length];
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 750);
+      }
+    });
+  })();
+
+  // Notificaciones de actividad reciente (prueba social). Datos de ejemplo â€” reemplazar por inscripciones/avances reales antes de publicar.
+  (function() {
+    const toast = document.getElementById('proofToast');
+    const avatarEl = document.getElementById('ptAvatar');
+    const textEl = document.getElementById('ptText');
+    const timeEl = document.getElementById('ptTime');
+    if(!toast) return;
+    const COLORS = ['#e3a63d','#8d7cf0','#ff6b4a','#34d399'];
+
+    const names = ['LucÃ­a','MartÃ­n','Valentina','Federico','Camila','NicolÃ¡s','RocÃ­o','TomÃ¡s','SofÃ­a','Ezequiel',
+      'Milagros','AgustÃ­n','Florencia','Bruno','Julieta','Santiago','Abril','Gonzalo','Micaela','Ignacio',
+      'Catalina','Franco','Antonella','JoaquÃ­n','Delfina','MatÃ­as','Guadalupe','Lucas','Paula','Emiliano',
+      'Victoria','Ramiro','Renata','Facundo','Josefina','Maximiliano'];
+    const cities = ['Rosario','CÃ³rdoba','Mendoza','CABA','La Plata','Villa Carlos Paz','Salta','TucumÃ¡n',
+      'Mar del Plata','NeuquÃ©n','BahÃ­a Blanca','San Juan','Resistencia','Posadas','Santa Fe','Corrientes',
+      'RÃ­o Cuarto','San Luis'];
+    const modulos = ['ImÃ¡genes con IA','Video con IA','Audio & Voz','Publicidad','Redes & Calendario',
+      'Flujos Pro','AutomatizaciÃ³n IA','el Proyecto de Imagen','el Proyecto de Video'];
+
+    const templates = [
+      (n,c) => `<strong>${n}</strong> de ${c} se acaba de inscribir`,
+      (n,c,m) => `<strong>${n}</strong> de ${c} estÃ¡ cursando ${m}`,
+      (n,c) => `<strong>${n}</strong> de ${c} completÃ³ el curso ðŸŽ“`
+    ];
+
+    // Generamos 54 combinaciones variadas (nombre + ciudad + mÃ³dulo/estado desfasados para no repetir patrones)
+    const events = [];
+    for (let i = 0; i < 54; i++) {
+      const name = names[i % names.length];
+      const city = cities[(i * 5 + 2) % cities.length];
+      const modulo = modulos[(i * 3 + 1) % modulos.length];
+      const typeIdx = i % 3; // 0 inscripciÃ³n, 1 cursando, 2 completado
+      events.push({
+        text: templates[typeIdx](name, city, modulo),
+        initials: (name[0] + (city.replace('Villa ', '')[0] || 'X')).toUpperCase(),
+        mins: 1 + ((i * 7) % 55)
+      });
+    }
+    // Orden aleatorio en cada carga de pÃ¡gina
+    for (let i = events.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [events[i], events[j]] = [events[j], events[i]];
+    }
+
+    let i = 0;
+    function showNext() {
+      const e = events[i % events.length];
+      i++;
+      avatarEl.style.background = COLORS[i % COLORS.length];
+      avatarEl.textContent = e.initials;
+      textEl.innerHTML = e.text;
+      timeEl.textContent = e.mins < 60 ? ('hace ' + e.mins + ' minutos') : 'hace 1 hora';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 5000);
+    }
+    setTimeout(() => { showNext(); setInterval(showNext, 13000); }, 4000);
+  })();
+
+  // Parallax sutil en el fondo del hero al hacer scroll
+  (function() {
+    const els = document.querySelectorAll('.parallax-el');
+    if(!els.length) return;
+    let raf = null;
+    function update() {
+      const y = window.scrollY || 0;
+      els.forEach((el, i) => {
+        const speed = i % 2 === 0 ? 0.08 : 0.14;
+        el.style.transform = 'translateY(' + (y * speed) + 'px)';
+      });
+      raf = null;
+    }
+    window.addEventListener('scroll', () => { if(!raf) raf = requestAnimationFrame(update); }, {passive:true});
+  })();
+
+  // Fecha automÃ¡tica del certificado
+  (function() {
+    const el = document.getElementById('certDate');
+    if(!el) return;
+    const d = new Date();
+    el.textContent = d.toLocaleDateString('es-AR', { day:'numeric', month:'long', year:'numeric' });
+  })();
+
+  // Checkout: abrir / cerrar modal y envÃ­o del formulario a GalioPay (vÃ­a tu backend)
+  function openCheckout(e) {
+    if(e) e.preventDefault();
+    const mode = typeof arguments[1] === 'string' ? arguments[1] : 'register';
+    if(typeof setCheckoutMode === 'function') setCheckoutMode(mode);
+    const overlay = document.getElementById('checkoutOverlay');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCheckout() {
+    const overlay = document.getElementById('checkoutOverlay');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  async function submitCheckout(e) {
+    e.preventDefault();
+    const btn = document.getElementById('coSubmitBtn');
+    const errBox = document.getElementById('coError');
+    const name = document.getElementById('coName').value.trim();
+    const email = document.getElementById('coEmail').value.trim();
+    const phone = document.getElementById('coPhone').value.trim();
+
+    errBox.style.display = 'none';
+    const originalLabel = btn.textContent;
+    btn.textContent = 'Generando tu link de pagoâ€¦';
+    btn.disabled = true;
+
+    // Guardamos el nombre localmente para pre-cargarlo en el certificado
+    // cuando el alumno vuelva de pagar en GalioPay.
+    try { sessionStorage.setItem('academia_nombre', name); } catch(err) {}
+
+    try {
+      // Este fetch llama a TU backend (no a GalioPay directamente).
+      // Ver backend-galiopay-ejemplo.js para el servidor de referencia.
+      const res = await fetch('/api/crear-pago-galiopay', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre: name, email, telefono: phone })
+      });
+
+      if(!res.ok) throw new Error('server');
+      const data = await res.json();
+      if(!data.url) throw new Error('no-url');
+
+      // Redirigimos al comprador a la pÃ¡gina de pago segura de GalioPay
+      window.location.href = data.url;
+
+    } catch (err) {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      errBox.style.display = 'block';
+      errBox.innerHTML = 'âš ï¸ No pudimos conectar con el servidor de pagos. Si estÃ¡s viendo esta pÃ¡gina como demo estÃ¡tica, el backend de GalioPay todavÃ­a no estÃ¡ desplegado â€” revisÃ¡ <code>backend-galiopay-ejemplo.js</code> para conectarlo. Si el problema persiste en producciÃ³n, escribinos por WhatsApp.';
+    }
+  }
+  function goToCourseFromCheckout() {
+    closeCheckout();
+    window.location.href = 'course.html';
+    setTimeout(() => {
+      document.getElementById('checkoutForm').classList.remove('hidden');
+      document.getElementById('checkoutSuccess').classList.remove('show');
+    }, 500);
+  }
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeCheckout(); });
+
+  // Si volvemos desde GalioPay (backUrl.success / backUrl.failure), mostramos el estado correcto.
+  // El pago YA fue confirmado por GalioPay antes de redirigir acÃ¡ â€” este bloque solo actualiza
+  // la interfaz. La confirmaciÃ³n real y el otorgamiento de acceso deben basarse en el webhook
+  // que recibe tu backend (ver backend-galiopay-ejemplo.js), no en este redirect.
+  (function() {
+    const hash = window.location.hash;
+    if(hash === '#pago-exitoso') {
+      const name = (function(){ try { return sessionStorage.getItem('academia_nombre') || ''; } catch(e){ return ''; } })();
+      openCheckout();
+      document.getElementById('checkoutForm').classList.add('hidden');
+      document.getElementById('checkoutSuccess').classList.add('show');
+      const firstName = name.split(' ')[0] || '';
+      document.getElementById('successName').textContent = firstName ? ('Bienvenido/a, ' + firstName) : 'tu inscripciÃ³n estÃ¡ confirmada';
+      const certInput = document.getElementById('certNameInput');
+      if(certInput && name) certInput.value = name;
+    } else if(hash === '#pago-fallido') {
+      openCheckout();
+      const errBox = document.getElementById('coError');
+      if(errBox) {
+        errBox.style.display = 'block';
+        errBox.innerHTML = 'âš ï¸ El pago no se completÃ³. PodÃ©s intentar de nuevo cuando quieras â€” no se realizÃ³ ningÃºn cobro.';
+      }
+    }
+  })();
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, {threshold:0.12});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const ACADEMIA_SUPABASE_URL = 'https://iomaxlhnkvllpdneexxz.supabase.co';
+  const ACADEMIA_SUPABASE_KEY = 'sb_publishable_JQLKu3DNODNzjvp5KySwMw_kSk5OtYi';
+  const COURSE_SLUG = 'ia-generativa-2026';
+  const academyDb = window.supabase ? window.supabase.createClient(ACADEMIA_SUPABASE_URL, ACADEMIA_SUPABASE_KEY) : null;
+  const academyState = {
+    session: null,
+    user: null,
+    profile: null,
+    course: null,
+    lessons: [],
+    lessonByPage: new Map(),
+    completedLessonIds: new Set(),
+    enrollment: null,
+    certificate: null
+  };
+  let checkoutMode = 'register';
+
+  function setCheckoutMode(mode) {
+    checkoutMode = mode === 'login' ? 'login' : 'register';
+    const form = document.getElementById('checkoutForm');
+    const registerTab = document.getElementById('checkoutRegisterTab');
+    const loginTab = document.getElementById('checkoutLoginTab');
+    const nameInput = document.getElementById('coName');
+    const phoneInput = document.getElementById('coPhone');
+    const passwordInput = document.getElementById('coPassword');
+    const submitBtn = document.getElementById('coSubmitBtn');
+    if(form) form.classList.toggle('checkout-mode-login', checkoutMode === 'login');
+    if(registerTab) registerTab.classList.toggle('active', checkoutMode === 'register');
+    if(loginTab) loginTab.classList.toggle('active', checkoutMode === 'login');
+    if(nameInput) nameInput.required = checkoutMode === 'register';
+    if(phoneInput) phoneInput.required = checkoutMode === 'register';
+    if(passwordInput) passwordInput.autocomplete = checkoutMode === 'login' ? 'current-password' : 'new-password';
+    if(submitBtn) submitBtn.textContent = checkoutMode === 'login' ? 'Iniciar sesiÃ³n' : 'Continuar a GalioPay â€” $4.990';
+    const errBox = document.getElementById('coError');
+    if(errBox) errBox.style.display = 'none';
+  }
+
+  function showCourseNotice(message, tone = 'info') {
+    const el = document.getElementById('courseNotice');
+    if(!el) return;
+    if(!message) {
+      el.classList.remove('show');
+      el.textContent = '';
+      return;
+    }
+    el.classList.add('show');
+    el.style.borderColor = tone === 'ok' ? 'rgba(52,211,153,0.35)' : tone === 'warn' ? 'rgba(251,191,36,0.35)' : 'rgba(227,166,61,0.30)';
+    el.style.background = tone === 'ok' ? 'rgba(52,211,153,0.10)' : tone === 'warn' ? 'rgba(251,191,36,0.10)' : 'rgba(227,166,61,0.10)';
+    el.textContent = message;
+  }
+
+  function updatePaymentBanner() {
+    const banner = document.getElementById('paymentPendingBanner');
+    if(!banner) return;
+    banner.classList.toggle('show', !!academyState.user && !academyState.enrollment);
+  }
+
+  function currentLesson() {
+    return academyState.lessonByPage.get(currentPage);
+  }
+
+  function pageIsCertificate(page) {
+    return page === 'certificado';
+  }
+
+  function updateStudentUi() {
+    const chip = document.getElementById('studentChip');
+    const authBtn = document.getElementById('authActionBtn');
+    const completeBtn = document.getElementById('completeLessonBtn');
+    const fullName = academyState.profile?.full_name || academyState.user?.user_metadata?.full_name || academyState.user?.email || '';
+
+    if(chip) {
+      chip.textContent = fullName ? `Hola, ${fullName.split(' ')[0]}` : 'Alumno/a';
+      chip.classList.toggle('show', !!academyState.user);
+    }
+    if(authBtn) {
+      authBtn.textContent = academyState.user ? 'Cerrar sesiÃ³n' : 'Registrarme / entrar';
+      authBtn.onclick = academyState.user ? signOutAcademia : openCheckout;
+    }
+    if(completeBtn) {
+      completeBtn.style.display = pageIsCertificate(currentPage) ? 'none' : '';
+      const lesson = currentLesson();
+      completeBtn.disabled = !academyState.user || !academyState.enrollment || !lesson || academyState.completedLessonIds.has(lesson.id);
+      completeBtn.textContent = lesson && academyState.completedLessonIds.has(lesson.id) ? 'Clase completada âœ“' : 'Marcar clase completa';
+    }
+  }
+
+  async function loadAcademiaState() {
+    if(!academyDb) {
+      showCourseNotice('No se pudo cargar Supabase. RevisÃ¡ la conexiÃ³n o el bloqueo del CDN.', 'warn');
+      return;
+    }
+    try {
+      const { data: sessionData } = await academyDb.auth.getSession();
+      academyState.session = sessionData.session;
+      academyState.user = sessionData.session?.user || null;
+
+      const { data: course } = await academyDb.from('courses').select('id,title,slug').eq('slug', COURSE_SLUG).single();
+      academyState.course = course || null;
+
+      if(course) {
+        const { data: lessons } = await academyDb
+          .from('lessons')
+          .select('id,title,page_key,modules!inner(course_id,order_index)')
+          .eq('modules.course_id', course.id)
+          .order('order_index', { foreignTable: 'modules', ascending: true })
+          .order('order_index', { ascending: true });
+
+        academyState.lessons = (lessons || []).filter(l => l.page_key);
+        academyState.lessonByPage = new Map(academyState.lessons.map(l => [l.page_key, l]));
+      }
+
+      if(academyState.user && academyState.course) {
+        const [{ data: profile }, { data: enrollment }, { data: progress }, { data: certificate }] = await Promise.all([
+          academyDb.from('profiles').select('full_name,email').eq('id', academyState.user.id).maybeSingle(),
+          academyDb.from('enrollments').select('*').eq('user_id', academyState.user.id).eq('course_id', academyState.course.id).eq('status','active').maybeSingle(),
+          academyDb.from('lesson_progress').select('lesson_id,status').eq('user_id', academyState.user.id).eq('status','completed'),
+          academyDb.from('certificates').select('*').eq('user_id', academyState.user.id).eq('course_id', academyState.course.id).maybeSingle()
+        ]);
+        academyState.profile = profile || null;
+        academyState.enrollment = enrollment || null;
+        academyState.completedLessonIds = new Set((progress || []).map(p => p.lesson_id));
+        academyState.certificate = certificate || null;
+      } else {
+        academyState.profile = null;
+        academyState.enrollment = null;
+        academyState.completedLessonIds = new Set();
+        academyState.certificate = null;
+      }
+
+      updateProgressUi();
+      updateCertificateUi();
+      updateStudentUi();
+      updatePaymentBanner();
+
+      if(academyState.user && !academyState.enrollment) {
+        showCourseNotice('Tu cuenta estÃ¡ creada. Cuando GalioPay confirme el pago, el acceso al curso se activa automÃ¡ticamente.', 'warn');
+      } else if(academyState.user && academyState.enrollment) {
+        showCourseNotice('', 'ok');
+      }
+    } catch(err) {
+      console.warn('AcademIA Supabase state error', err);
+      showCourseNotice('Supabase respondiÃ³ con un error. Asegurate de aplicar el SQL actualizado en el proyecto.', 'warn');
+      updatePaymentBanner();
+    }
+  }
+
+  function updateProgressUi() {
+    const total = academyState.lessons.length || pages.length;
+    const completed = academyState.completedLessonIds.size;
+    const pct = total ? Math.round((completed / total) * 100) : 0;
+    const fill = document.getElementById('progressFill');
+    const text = document.getElementById('progressText');
+    if(fill) fill.style.width = pct + '%';
+    if(text) text.textContent = `${completed} de ${total} Â· ${pct}%`;
+  }
+
+  function updateCertificateUi() {
+    const locked = document.getElementById('certLocked');
+    const content = document.getElementById('certContent');
+    const nameInput = document.getElementById('certNameInput');
+    const certCode = document.getElementById('certCode');
+    const unlocked = !!academyState.certificate;
+    if(locked) locked.classList.toggle('hidden', unlocked);
+    if(content) content.classList.toggle('hidden', !unlocked);
+    const fullName = academyState.profile?.full_name || academyState.user?.user_metadata?.full_name || 'Alumno/a';
+    if(nameInput) {
+      nameInput.value = fullName;
+      nameInput.readOnly = true;
+    }
+    if(certCode && academyState.certificate?.certificate_code) {
+      certCode.innerHTML = academyState.certificate.certificate_code.replaceAll('-', '<br>');
+    }
+  }
+
+  function isExistingUserError(error) {
+    const message = `${error?.message || ''} ${error?.code || ''} ${error?.status || ''}`.toLowerCase();
+    return message.includes('already') ||
+      message.includes('registered') ||
+      message.includes('exists') ||
+      message.includes('user_already_exists') ||
+      message.includes('422');
+  }
+
+  function isBadCredentialsError(error) {
+    const message = `${error?.message || ''} ${error?.code || ''} ${error?.status || ''}`.toLowerCase();
+    return message.includes('invalid login') ||
+      message.includes('invalid_credentials') ||
+      message.includes('400');
+  }
+
+  async function ensureAcademiaAccount(fullName, email, password) {
+    const normalizedEmail = email.trim().toLowerCase();
+    let { data, error } = await academyDb.auth.signUp({
+      email: normalizedEmail,
+      password,
+      options: { data: { full_name: fullName } }
+    });
+
+    if(error && isExistingUserError(error)) {
+      const login = await academyDb.auth.signInWithPassword({ email: normalizedEmail, password });
+      data = login.data;
+      error = login.error;
+      if(error && isBadCredentialsError(error)) {
+        throw new Error('Ese email ya estÃ¡ registrado, pero la contraseÃ±a no coincide. UsÃ¡ la contraseÃ±a anterior o recuperala desde Supabase Auth.');
+      }
+    }
+    if(error) throw error;
+    if(!data.session) {
+      throw new Error('RevisÃ¡ tu email para confirmar la cuenta y despuÃ©s volvÃ© a iniciar el pago.');
+    }
+
+    academyState.session = data.session;
+    academyState.user = data.session.user;
+    await academyDb.from('profiles').upsert({
+      id: data.session.user.id,
+      email: normalizedEmail,
+      full_name: fullName,
+      updated_at: new Date().toISOString()
+    });
+    await loadAcademiaState();
+    return data.session;
+  }
+
+  async function signInAcademia(email, password) {
+    const normalizedEmail = email.trim().toLowerCase();
+    const { data, error } = await academyDb.auth.signInWithPassword({ email: normalizedEmail, password });
+    if(error) throw error;
+    academyState.session = data.session;
+    academyState.user = data.session?.user || null;
+    await loadAcademiaState();
+    return data.session;
+  }
+
+  async function createGalioPayLink(nombre, email, telefono = '') {
+    const { data, error } = await academyDb.functions.invoke('crear-pago-galiopay', {
+      body: { nombre, email, telefono, course_slug: COURSE_SLUG }
+    });
+    if(error) throw error;
+    if(!data?.url) throw new Error('GalioPay no devolviÃ³ URL de pago.');
+    window.location.href = data.url;
+  }
+
+  async function startPaymentForCurrentUser(e) {
+    if(e) e.preventDefault();
+    if(!academyState.user) {
+      openCheckout(e, 'login');
+      return;
+    }
+    const btn = e?.currentTarget;
+    const originalLabel = btn?.textContent;
+    if(btn) {
+      btn.disabled = true;
+      btn.textContent = 'Generando link...';
+    }
+    try {
+      const nombre = academyState.profile?.full_name || academyState.user.user_metadata?.full_name || academyState.user.email?.split('@')[0] || 'Alumno/a';
+      const email = academyState.profile?.email || academyState.user.email || '';
+      await createGalioPayLink(nombre, email);
+    } catch(err) {
+      if(btn) {
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      }
+      showCourseNotice(err.message || 'No pudimos crear el pago. RevisÃ¡ GalioPay e intentÃ¡ de nuevo.', 'warn');
+    }
+  }
+
+  async function signOutAcademia(e) {
+    if(e) e.preventDefault();
+    await academyDb.auth.signOut();
+    academyState.session = null;
+    academyState.user = null;
+    academyState.profile = null;
+    academyState.enrollment = null;
+    academyState.completedLessonIds = new Set();
+    academyState.certificate = null;
+    updateProgressUi();
+    updateCertificateUi();
+    updateStudentUi();
+    updatePaymentBanner();
+    showCourseNotice('SesiÃ³n cerrada. Para seguir el avance, entrÃ¡ con tu email.', 'warn');
+  }
+
+  async function markCurrentLessonCompleted() {
+    const lesson = currentLesson();
+    if(!academyState.user) {
+      showCourseNotice('Primero registrate o iniciÃ¡ sesiÃ³n para guardar tu avance.', 'warn');
+      openCheckout();
+      return;
+    }
+    if(!academyState.enrollment) {
+      showCourseNotice('Tu acceso todavÃ­a no estÃ¡ activo. Si ya pagaste, esperÃ¡ unos segundos y actualizaremos el estado.', 'warn');
+      await loadAcademiaState();
+      return;
+    }
+    if(!lesson) {
+      showCourseNotice('Esta clase todavÃ­a no estÃ¡ vinculada en Supabase. AplicÃ¡ el SQL actualizado.', 'warn');
+      return;
+    }
+
+    const btn = document.getElementById('completeLessonBtn');
+    if(btn) {
+      btn.disabled = true;
+      btn.textContent = 'Guardando...';
+    }
+    const { error } = await academyDb.from('lesson_progress').upsert({
+      user_id: academyState.user.id,
+      lesson_id: lesson.id,
+      status: 'completed',
+      progress_pct: 100
+    }, { onConflict: 'user_id,lesson_id' });
+    if(error) {
+      showCourseNotice('No pudimos guardar el avance. RevisÃ¡ las polÃ­ticas RLS del SQL.', 'warn');
+    } else {
+      academyState.completedLessonIds.add(lesson.id);
+      showCourseNotice('Clase completada. Tu avance quedÃ³ guardado.', 'ok');
+      await loadAcademiaState();
+    }
+  }
+
+  const originalGoPage = window.goPage;
+  window.goPage = function(page) {
+    if(!academyState.enrollment && page !== 'intro' && page !== 'certificado') {
+      showCourseNotice('Para continuar el curso completo, abonÃ¡ el acceso con GalioPay.', 'warn');
+      if(academyState.user) startPaymentForCurrentUser();
+      else openCheckout(null, 'login');
+      return;
+    }
+    originalGoPage(page);
+    updateProgressUi();
+    updateStudentUi();
+    updateCertificateUi();
+  };
+
+  window.submitCheckout = async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('coSubmitBtn');
+    const errBox = document.getElementById('coError');
+    const name = document.getElementById('coName').value.trim();
+    const email = document.getElementById('coEmail').value.trim();
+    const password = document.getElementById('coPassword').value;
+    const phone = document.getElementById('coPhone').value.trim();
+
+    errBox.style.display = 'none';
+    const originalLabel = btn.textContent;
+    btn.textContent = checkoutMode === 'login' ? 'Entrando...' : 'Creando tu acceso seguro...';
+    btn.disabled = true;
+
+    try { sessionStorage.setItem('academia_nombre', name); } catch(err) {}
+
+    try {
+      if(checkoutMode === 'login') {
+        await signInAcademia(email, password);
+        btn.textContent = originalLabel;
+        btn.disabled = false;
+        if(academyState.enrollment) {
+          window.location.href = 'course.html';
+        } else {
+          closeCheckout();
+          showCourseNotice('Tu cuenta estÃ¡ activa, pero todavÃ­a falta el pago para comenzar el curso.', 'warn');
+          updatePaymentBanner();
+        }
+        return;
+      }
+      await ensureAcademiaAccount(name, email, password);
+      btn.textContent = 'Generando tu link de pago...';
+      await createGalioPayLink(name, email, phone);
+    } catch (err) {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      errBox.style.display = 'block';
+      errBox.textContent = 'âš ï¸ ' + (err.message || 'No pudimos crear el pago. RevisÃ¡ la Edge Function y los secretos de GalioPay.');
+    }
+  };
+
+  window.goToCourseFromCheckout = async function() {
+    closeCheckout();
+    await loadAcademiaState();
+    window.location.href = 'course.html';
+    setTimeout(() => {
+      document.getElementById('checkoutForm').classList.remove('hidden');
+      document.getElementById('checkoutSuccess').classList.remove('show');
+    }, 500);
+  };
+
+  (function initAcademiaSupabase() {
+    if(!academyDb) return;
+    academyDb.auth.onAuthStateChange((_event, session) => {
+      academyState.session = session;
+      academyState.user = session?.user || null;
+      loadAcademiaState();
+    });
+    loadAcademiaState();
+
+    if(window.location.hash === '#pago-exitoso') {
+      let tries = 0;
+      const poll = setInterval(async () => {
+        tries++;
+        await loadAcademiaState();
+        if(academyState.enrollment || tries >= 8) {
+          clearInterval(poll);
+          if(academyState.enrollment) {
+            openCheckout();
+            document.getElementById('checkoutForm').classList.add('hidden');
+            document.getElementById('checkoutSuccess').classList.add('show');
+          } else {
+            showCourseNotice('Pago recibido. Estamos esperando la confirmaciÃ³n de GalioPay para activar el acceso.', 'warn');
+          }
+        }
+      }, 2500);
+    }
+  })();
+</script>
+</body>
+</html>
+
