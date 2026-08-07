@@ -628,6 +628,17 @@
   .result-preview { background:var(--surface); border:1px dashed var(--border); border-radius:var(--radius-md); padding:20px; text-align:center; margin-top:14px; }
   .result-preview h4 { font-size:14px; font-weight:600; margin-bottom:6px; color:var(--positive); }
   .result-preview p { font-size:13px; color:var(--text-secondary); margin-bottom:0; }
+
+  /* ---- lesson video (clase en video de cada módulo) ---- */
+  .lesson-video { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px; margin-bottom:26px; }
+  .lesson-video-head { display:flex; align-items:center; gap:8px; margin-bottom:12px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.8px; text-transform:uppercase; color:var(--text-tertiary); }
+  .lesson-video-head .d { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+  .lesson-video video { width:100%; max-height:420px; border-radius:var(--radius-md); display:block; background:#000; }
+  .lesson-video-cap { font-size:12.5px; color:var(--text-tertiary); margin-top:10px; }
+
+  /* ---- imagen ilustrativa dentro de un step-item ---- */
+  .step-img-wrap { margin-top:12px; }
+  .step-img { width:100%; border-radius:var(--radius-sm); border:1px solid var(--border); display:block; }
   .action-row { display:flex; gap:10px; margin-top:18px; padding-top:18px; border-top:1px solid var(--border); flex-wrap:wrap; }
   .hero { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; margin-bottom:28px; text-align:center; position:relative; overflow:hidden; }
   .hero::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--track-img),var(--track-vid) 33%,var(--track-aud) 66%,var(--track-ads)); }
@@ -786,6 +797,11 @@
       <div class="hero-stat"><div class="num">$0</div><div class="label">Costo inicial</div></div>
     </div>
   </div>
+  <div class="lesson-video">
+    <div class="lesson-video-head"><span class="d" style="background:var(--accent)"></span>Clase en video · Módulo 01</div>
+    <video src="assets/modulo-1.mp4" controls playsinline preload="metadata"></video>
+    <p class="lesson-video-cap">Introducción al curso: qué vas a aprender y cómo está organizado AcademIA.</p>
+  </div>
   <h3><span class="dot"></span>¿Qué es la IA generativa?</h3>
   <p>La inteligencia artificial generativa (IAG) es un tipo de IA capaz de crear contenido nuevo — imágenes, videos, audio, texto — a partir de instrucciones en lenguaje natural llamadas <strong>prompts</strong>. En 2026, estas herramientas son accesibles desde el navegador y permiten a cualquier persona producir materiales de calidad profesional sin conocimientos técnicos previos.</p>
   <div class="tip-box">
@@ -818,6 +834,11 @@
   <div class="page-eyebrow" style="color:var(--track-img)"><span class="d" style="background:var(--track-img)"></span>Módulo 02 · Imagen</div>
   <div class="page-title">Generación de Imágenes con IA</div>
   <div class="page-subtitle">Crea fotos, ilustraciones, mockups y arte conceptual desde texto. Herramientas gratuitas y de pago comparadas.</div>
+  <div class="lesson-video">
+    <div class="lesson-video-head"><span class="d" style="background:var(--track-img)"></span>Clase en video · Módulo 02</div>
+    <video src="assets/modulo-2.mp4" controls playsinline preload="metadata"></video>
+    <p class="lesson-video-cap">Generación de imágenes con IA: herramientas, prompts efectivos y flujo completo paso a paso.</p>
+  </div>
   <h3><span class="dot"></span>Herramientas principales (2026)</h3>
   <div class="card-grid">
     <div class="tool-card"><div class="tag-row"><span class="tag tag-freemium">Freemium</span></div><h4>Midjourney v7</h4><p>El estándar de calidad para imágenes artísticas y conceptuales. Excelente para branding, portadas y arte digital de alto nivel.</p><div class="price">Desde $10/mes · Plan básico</div></div>
@@ -831,10 +852,10 @@
   </div>
   <h3><span class="dot"></span>Paso a paso: tu primera imagen profesional</h3>
   <div class="step-list">
-    <div class="step-item"><div class="step-body"><h4>Define el objetivo</h4><p>¿Es para Instagram, una web, un anuncio? El formato y estilo cambian según el uso. Instagram Feed = 1:1 o 4:5. Web banner = 16:9. Stories = 9:16.</p></div></div>
-    <div class="step-item"><div class="step-body"><h4>Escribe un prompt estructurado</h4><p>Usa esta fórmula: <em>[sujeto] + [detalles] + [estilo] + [iluminación] + [cámara/lente]</em>. Ejemplo: "Fotografía de producto de un perfume dorado sobre mármol blanco, iluminación suave de estudio, fondo desenfocado, estilo editorial de lujo, lente 85mm, 4K".</p></div></div>
+    <div class="step-item"><div class="step-body"><h4>Define el objetivo</h4><p>¿Es para Instagram, una web, un anuncio? El formato y estilo cambian según el uso. Instagram Feed = 1:1 o 4:5. Web banner = 16:9. Stories = 9:16.</p><div class="step-img-wrap"><img class="step-img" src="assets/modulo-2-1.png" alt="Define el objetivo de tu imagen: formatos más comunes para Instagram Feed, Web Banner y Stories"></div></div></div>
+    <div class="step-item"><div class="step-body"><h4>Escribe un prompt estructurado</h4><p>Usa esta fórmula: <em>[sujeto] + [detalles] + [estilo] + [iluminación] + [cámara/lente]</em>. Ejemplo: "Fotografía de producto de un perfume dorado sobre mármol blanco, iluminación suave de estudio, fondo desenfocado, estilo editorial de lujo, lente 85mm, 4K".</p><div class="step-img-wrap"><img class="step-img" src="assets/modulo-2.png" alt="Fórmula para escribir un prompt efectivo: sujeto + detalles + estilo + iluminación + cámara/lente"></div></div></div>
     <div class="step-item"><div class="step-body"><h4>Itera y refina</h4><p>La primera imagen rara vez es perfecta. Ajusta el prompt, prueba variaciones, usa funciones como "zoom out", "rehacer región" o cambia el seed para explorar alternativas.</p></div></div>
-    <div class="step-item"><div class="step-body"><h4>Post-procesa</h4><p>Usa Canva, Photoshop o Photopea (gratis) para ajustar colores, recortar, añadir texto, logo o generative fill de Firefly para cambiar fondos.</p></div></div>
+    <div class="step-item"><div class="step-body"><h4>Post-procesa</h4><p>Usa Canva, Photoshop o Photopea (gratis) para ajustar colores, recortar, añadir texto, logo o generative fill de Firefly para cambiar fondos.</p><div class="step-img-wrap"><img class="step-img" src="assets/modulo-2-2.png" alt="Cómo iterar y refinar un prompt, y flujo de post-proceso: ajustes, recorte y texto/logo"></div></div></div>
   </div>
   <h3><span class="dot"></span>Comparativa rápida</h3>
   <table>
@@ -867,6 +888,11 @@
   <div class="page-eyebrow" style="color:var(--track-vid)"><span class="d" style="background:var(--track-vid)"></span>Módulo 03 · Video</div>
   <div class="page-title">Generación de Video con IA</div>
   <div class="page-subtitle">Desde clips cortos para redes hasta producciones cinematográficas. Todo lo que necesitas saber en 2026.</div>
+  <div class="lesson-video">
+    <div class="lesson-video-head"><span class="d" style="background:var(--track-vid)"></span>Clase en video · Módulo 03</div>
+    <video src="assets/modulo-3.mp4" controls playsinline preload="metadata"></video>
+    <p class="lesson-video-cap">Generación de video con IA: de storyboard a clip final, paso a paso.</p>
+  </div>
   <h3><span class="dot"></span>Herramientas principales (2026)</h3>
   <div class="card-grid">
     <div class="tool-card"><div class="tag-row"><span class="tag tag-pago">Pago</span></div><h4>OpenAI Sora 2</h4><p>El más avanzado para narrativa visual. Genera clips de hasta 20s con coherencia temporal y audio nativo integrado.</p><div class="price">ChatGPT Plus/Pro · Desde $20/mes</div></div>
@@ -878,9 +904,9 @@
   </div>
   <h3><span class="dot"></span>Paso a paso: video desde cero</h3>
   <div class="step-list">
-    <div class="step-item"><div class="step-body"><h4>Escribe un storyboard textual</h4><p>Divide tu idea en escenas de 3-5 segundos. Describe cada una con: acción, ambiente, iluminación y tipo de plano (plano general, primer plano, etc.). Un video de 15s = 3-4 escenas.</p></div></div>
+    <div class="step-item"><div class="step-body"><h4>Escribe un storyboard textual</h4><p>Divide tu idea en escenas de 3-5 segundos. Describe cada una con: acción, ambiente, iluminación y tipo de plano (plano general, primer plano, etc.). Un video de 15s = 3-4 escenas.</p><div class="step-img-wrap"><img class="step-img" src="assets/modulo-3-1.png" alt="Storyboard textual: tabla de escenas con acción, ambiente, iluminación y tipo de plano"></div></div></div>
     <div class="step-item"><div class="step-body"><h4>Genera las imágenes clave primero</h4><p>Usa Midjourney o DALL-E para crear los "frames clave" de cada escena. Luego anima esas imágenes con Kling, Runway o Veo usando el modo "imagen a video".</p></div></div>
-    <div class="step-item"><div class="step-body"><h4>Genera los clips de video</h4><p>En tu herramienta elegida, sube la imagen y describe el movimiento deseado. Genera 2-3 versiones de cada escena y elige la mejor. La coherencia entre clips mejora si usas la misma seed o referencia de imagen.</p></div></div>
+    <div class="step-item"><div class="step-body"><h4>Genera los clips de video</h4><p>En tu herramienta elegida, sube la imagen y describe el movimiento deseado. Genera 2-3 versiones de cada escena y elige la mejor. La coherencia entre clips mejora si usas la misma seed o referencia de imagen.</p><div class="step-img-wrap"><img class="step-img" src="assets/modulo-3-2.png" alt="Genera las imágenes clave y los clips de video para cada escena con Midjourney, Kling, Runway o Veo"></div></div></div>
     <div class="step-item"><div class="step-body"><h4>Edición y montaje final</h4><p>Usa CapCut (gratis), DaVinci Resolve (gratis) o Premiere para unir clips, añadir música, transiciones, texto y ajustar el ritmo. Exporta en 1080p o 4K según la plataforma.</p></div></div>
   </div>
   <h3><span class="dot"></span>Comparativa: texto a video</h3>
@@ -2354,5 +2380,3 @@ Paso 4: el resultado se sube automáticamente a Drive y se avisa por Slack o ema
 </script>
 </body>
 </html>
-
-
