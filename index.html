@@ -181,6 +181,10 @@
   @media(max-width:600px){
     .testi-grid{ grid-template-columns:1fr; gap:12px; }
     .testi-card{ padding:18px; }
+    .testi-card p.quote{ font-size:14.5px; line-height:1.65; }
+    .testi-avatar{ width:38px; height:38px; font-size:14px; }
+    .testi-who .name{ font-size:14px; }
+    .testi-who .role{ font-size:12.5px; }
     .rating-badge{ flex-wrap:wrap; text-align:center; }
   }
   .proof-shots { display:grid; grid-template-columns:0.85fr 1.15fr; gap:16px; margin:24px 0; }
@@ -260,6 +264,9 @@
   .showcase-body p { font-size:12px; color:var(--text-tertiary); margin:0; }
   @media(max-width:900px){ .showcase-grid{ grid-template-columns:1fr 1fr; } }
   @media(max-width:520px){ .showcase-grid{ grid-template-columns:1fr; } }
+  .showcase-grid-3col { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media(max-width:900px){ .showcase-grid-3col{ grid-template-columns:1fr 1fr; gap:12px; } }
+  @media(max-width:520px){ .showcase-grid-3col{ grid-template-columns:1fr; } }
   .video-testi-wrap { display:grid; grid-template-columns:0.9fr 1.1fr; gap:40px; align-items:center; }
   .video-testi-media { position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow-lg); aspect-ratio:4/3; }
   .video-testi-media img { width:100%; height:100%; object-fit:cover; }
@@ -706,9 +713,6 @@
     .buy-box{ padding:20px 18px 18px; }
     .buy-box-price .new{ font-size:30px; }
     .buy-box-feats li{ font-size:12.5px; }
-    .checkout-modal{ max-width:100%; border-radius:var(--radius-xl) var(--radius-xl) 0 0; }
-    .checkout-body{ padding:18px 16px 20px; max-height:74vh; overflow-y:auto; }
-    #checkoutOverlay{ padding:0; align-items:flex-end; }
     .marquee-chip{ font-size:11.5px; padding:7px 12px; }
     .showcase-grid{ gap:12px; }
     .upcoming-card{ padding:18px; }
@@ -717,6 +721,23 @@
     .final-cta h2{ font-size:21px; }
     .reel-phone{ max-width:220px; }
     .l-footer-inner{ flex-direction:column; text-align:center; gap:6px; }
+  }
+  /* ============ AUTH / CHECKOUT MODAL — MOBILE ============ */
+  @media(max-width:760px){
+    #checkoutOverlay{ padding:0; align-items:flex-end; }
+    .checkout-modal{ max-width:100%; width:100%; border-radius:var(--radius-xl) var(--radius-xl) 0 0; max-height:92vh; display:flex; flex-direction:column; }
+    .checkout-head{ padding:16px 16px; flex-shrink:0; }
+    .checkout-close{ width:36px; height:36px; font-size:16px; }
+    .checkout-body{ padding:16px 16px calc(20px + env(safe-area-inset-bottom, 0px)); overflow-y:auto; flex:1; }
+    .checkout-summary{ flex-wrap:wrap; gap:8px 12px; }
+    .checkout-summary .cs-name{ font-size:12.5px; }
+    .checkout-summary .cs-price{ font-size:18px; }
+    .checkout-tabs{ margin-bottom:16px; }
+    .checkout-tab{ font-size:12px; padding:10px 6px; line-height:1.25; }
+    .co-field label{ font-size:12.5px; }
+    .co-field input{ padding:13px 12px; font-size:16px; }
+    .co-row{ flex-direction:column; gap:0; }
+    #coSubmitBtn{ padding:14px; font-size:14.5px; }
   }
   @media(max-width:400px){
     .l-hero h1{ font-size:22px; }
@@ -917,7 +938,7 @@ src="https://www.facebook.com/tr?id=717335459401864&ev=PageView&noscript=1"
       <div class="track track-output"><span class="track-label">OUT</span><div class="track-lane"><div class="clip"></div></div></div>
       <div class="track-viz-foot">Cuatro disciplinas, un solo flujo de producción — así trabaja un profesional en 2026.</div>
     </div>
-    <div class="showcase-grid stagger-grid" style="grid-template-columns:repeat(3,1fr);">
+    <div class="showcase-grid-3col stagger-grid">
       <div class="showcase-card tilt">
         <div class="showcase-media"><span class="showcase-tag" style="color:var(--track-img)">Módulo 02 · Imagen</span><img src="assets/luxeol-producto-lujo.png" alt="Fotografía de producto de un frasco de crema de lujo LUXÉOL generada con IA" loading="lazy"></div>
       </div>
@@ -957,7 +978,7 @@ src="https://www.facebook.com/tr?id=717335459401864&ev=PageView&noscript=1"
       <h2>Y de ahí saltás directo a publicidad</h2>
       <p>Con el mismo frasco y la misma sesión de trabajo, el módulo 4 te lleva a piezas listas para pauta: modelo generada con IA y el video final para redes.</p>
     </div>
-    <div class="showcase-grid stagger-grid" style="grid-template-columns:repeat(3,1fr);">
+    <div class="showcase-grid-3col stagger-grid">
       <div class="showcase-card tilt">
         <div class="showcase-media"><span class="showcase-tag" style="color:var(--track-vid)">Módulo 03 · Video</span><video src="assets/luxeol-lifestyle.mp4" autoplay muted loop playsinline poster="assets/luxeol-lifestyle.png"></video><span class="showcase-play">▶ Video con sonido</span></div>
       </div>
@@ -1188,7 +1209,7 @@ src="https://www.facebook.com/tr?id=717335459401864&ev=PageView&noscript=1"
       </div>
     </div>
 
-    <div class="testi-grid" style="grid-template-columns:repeat(3,1fr); margin-top:18px;">
+    <div class="testi-grid" style="margin-top:18px;">
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="quote">Con el módulo de video convertí las fotos de producto de mi tienda en clips animados en minutos. Mis anuncios ahora se ven de otra categoría.</p>
